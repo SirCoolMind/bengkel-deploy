@@ -1,0 +1,19 @@
+# ✨ CABARAN 1: Dependabot
+# Setiap minggu, GitHub menyemak versi baharu dan membuka pull request untuk anda.
+# CI men-test setiap pull request itu: anda hanya perlu semak dan merge.
+version: 2
+updates:
+  - package-ecosystem: npm # package.json
+    directory: /
+    schedule:
+      interval: weekly
+
+  - package-ecosystem: github-actions # actions/checkout@v7, actions/setup-node@v7
+    directory: /
+    schedule:
+      interval: weekly
+
+  - package-ecosystem: docker # FROM node:22-alpine, FROM nginx:1.30-alpine
+    directory: /
+    schedule:
+      interval: weekly

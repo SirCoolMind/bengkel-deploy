@@ -1,0 +1,51 @@
+// GitHub Codespaces: "server" Linux untuk setiap peserta, dalam browser, tiada apa-apa perlu di-install.
+// Code → Codespaces → Create codespace on main. Kali pertama mengambil masa ~3 – 5 minit.
+{
+  "name": "Bengkel Deploy: Inventori Aset ICT",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:1-22-bookworm",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  },
+  "hostRequirements": {
+    "cpus": 2
+  },
+
+  // Sekali sahaja semasa Codespace dicipta: Nginx, PM2, npm ci (scripts/sediakan-codespace.sh)
+  "postCreateCommand": "bash scripts/sediakan-codespace.sh",
+  // Setiap kali Codespace bermula semula: hidupkan semula Nginx, PM2 dan runner (scripts/mula-semula.sh)
+  "postStartCommand": "bash scripts/mula-semula.sh",
+
+  // "notify": bila port ini mula berjalan, Codespace memaparkan butang "Open in Browser" di bawah kanan skrin
+  "forwardPorts": [41730, 3000, 8080, 9000],
+  "portsAttributes": {
+    "41730": { "label": "Dev (npm start)", "onAutoForward": "notify" },
+    "41780": { "label": "json-server (dev)", "onAutoForward": "ignore" },
+    "41740": { "label": "Preview (npm run preview)", "onAutoForward": "silent" },
+    "3000": { "label": "1 · API dalam PM2", "onAutoForward": "silent" },
+    "8080": { "label": "2 · Nginx", "onAutoForward": "notify" },
+    "9000": { "label": "3 · Docker / production", "onAutoForward": "notify" },
+    "41700": { "label": "Slaid bengkel", "onAutoForward": "notify" }
+  },
+
+  "customizations": {
+    "codespaces": {
+      "openFiles": ["README.md"]
+    },
+    "vscode": {
+      "settings": {
+        // Fail .md (panduan) dibuka sebagai halaman yang kemas, bukan teks mentah
+        "workbench.editorAssociations": { "*.md": "vscode.markdown.preview.editor" },
+        // Setiap folder dipaparkan dalam baris sendiri (bukan "deploy/nginx" dalam satu baris),
+        // supaya arahan "klik folder deploy, kemudian nginx" dalam panduan sama dengan skrin
+        "explorer.compactFolders": false
+      },
+      "extensions": [
+        "Vue.volar",
+        "github.vscode-github-actions",
+        "ms-azuretools.vscode-containers",
+        "redhat.vscode-yaml"
+      ]
+    }
+  }
+}

@@ -1,0 +1,14 @@
+node_modules
+dist
+backup
+.vite
+*.log
+.DS_Store
+
+# "Pangkalan data" semasa pembangunan: dicipta daripada db.seed.json (npm run reset-db)
+db.json
+
+# Fail rahsia: JANGAN masukkan ke dalam git
+.env
+.env.*
+!.env.example

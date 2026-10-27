@@ -1,0 +1,9 @@
+# Fail yang TIDAK dihantar kepada Docker semasa build image
+node_modules
+dist
+backup
+db.json
+.env
+.git
+checkpoints
+slaid

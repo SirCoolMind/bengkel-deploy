@@ -1,0 +1,4 @@
+# Simpan semua fail teks dengan hujung baris LF (Linux), walaupun repo diedit di Windows.
+# Skrip .sh dengan hujung baris CRLF gagal di Linux ("bad interpreter").
+* text=auto eol=lf
+*.png binary

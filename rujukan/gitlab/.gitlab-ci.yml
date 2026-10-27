@@ -1,0 +1,40 @@
+# Pipeline yang SAMA seperti .github/workflows/ci.yml (checkpoint 05), ditulis untuk GitLab CI/CD.
+# Letakkan fail ini di folder utama repo GitLab dengan nama .gitlab-ci.yml.
+#
+#   GitHub Actions                 GitLab CI/CD
+#   on: push: branches: [main]     workflow: rules: (di bawah)
+#   jobs: test / deploy            stages: [test, deploy]
+#   runs-on: ubuntu-latest         image: node:22 (shared runner GitLab)
+#   runs-on: self-hosted           tags: [server] (GitLab Runner di server anda)
+#   needs: test                    stage deploy hanya bermula selepas stage test lulus
+
+# BILA? Setiap push ke branch utama (main)
+workflow:
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+stages:
+  - test
+  - deploy
+
+test:
+  stage: test
+  # DI MANA? Container node:22 pada shared runner GitLab
+  image: node:22
+  # APA? Command yang sama. GitLab mengambil kod sendiri (tiada langkah checkout).
+  script:
+    - npm ci
+    - npm test
+    - npm run build
+
+deploy:
+  stage: deploy
+  # DI MANA? GitLab Runner yang anda daftarkan di server dengan tag "server" (shell executor)
+  tags:
+    - server
+  variables:
+    COMMIT_SHA: $CI_COMMIT_SHA # untuk footer aplikasi
+  script:
+    - docker compose up -d --build --wait
+    - curl -fsS http://localhost:9000/version.json
+    - curl -fsS "http://localhost:9000/api/assets?_per_page=1" > /dev/null

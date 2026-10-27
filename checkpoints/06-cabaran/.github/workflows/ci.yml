@@ -1,0 +1,60 @@
+# CI/CD: setiap kali kod di-push ke GitHub,
+#   job "test"   → test dan build (di mesin GitHub)
+#   job "deploy" → jika test lulus, deploy ke server kita (di runner dalam Codespace)
+# Lihat hasilnya dalam tab "Actions" repo anda.
+name: CI/CD
+
+# BILA? Setiap push ke branch main, dan setiap pull request ke main
+on:
+  push:
+    branches: [main]
+  # ✨ CABARAN 3: test pull request juga, supaya "Test & build" boleh diwajibkan sebelum merge
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    name: Test & build
+    # DI MANA? Mesin Linux baharu yang disediakan oleh GitHub
+    runs-on: ubuntu-latest
+    # APA? Langkah yang sama seperti yang kita taip sendiri
+    steps:
+      - name: Ambil kod (checkout)
+        uses: actions/checkout@v7
+
+      - name: Sediakan Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 22
+
+      - name: Install package
+        run: npm ci
+
+      - name: Test
+        run: npm test
+
+      - name: Build
+        run: npm run build
+
+  deploy:
+    name: Deploy ke server
+    # Hanya selepas job "test" lulus. Test gagal = tiada deploy.
+    needs: test
+    # ✨ CABARAN 3: pull request di-test sahaja. Deploy hanya selepas merge (push ke main).
+    if: github.event_name == 'push'
+    # DI MANA? Server kita sendiri (self-hosted runner dalam Codespace)
+    runs-on: self-hosted
+    steps:
+      - name: Ambil kod (checkout)
+        uses: actions/checkout@v7
+
+      - name: Build & jalankan container
+        # Command yang sama seperti Modul 3. --wait: tunggu sehingga semua container sedia.
+        run: docker compose up -d --build --wait
+        env:
+          COMMIT_SHA: ${{ github.sha }} # untuk footer aplikasi
+
+      - name: Semak aplikasi berjalan
+        run: |
+          curl -fsS http://localhost:9000/version.json
+          curl -fsS "http://localhost:9000/api/assets?_per_page=1" > /dev/null

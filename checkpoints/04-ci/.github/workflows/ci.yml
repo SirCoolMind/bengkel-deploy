@@ -1,0 +1,32 @@
+# CI: setiap kali kod di-push ke GitHub, test dan build secara automatik.
+# Lihat hasilnya dalam tab "Actions" repo anda.
+name: CI/CD
+
+# BILA? Setiap push ke branch main
+on:
+  push:
+    branches: [main]
+
+jobs:
+  test:
+    name: Test & build
+    # DI MANA? Mesin Linux baharu yang disediakan oleh GitHub
+    runs-on: ubuntu-latest
+    # APA? Langkah yang sama seperti yang kita taip sendiri
+    steps:
+      - name: Ambil kod (checkout)
+        uses: actions/checkout@v7
+
+      - name: Sediakan Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 22
+
+      - name: Install package
+        run: npm ci
+
+      - name: Test
+        run: npm test
+
+      - name: Build
+        run: npm run build

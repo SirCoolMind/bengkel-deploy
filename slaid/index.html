@@ -1,0 +1,802 @@
+<!doctype html>
+<html lang="ms">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Deployment dan Penyelenggaraan</title>
+  <link rel="icon" type="image/svg+xml" href="../public/favicon.svg">
+  <link rel="stylesheet" href="deck.css">
+</head>
+<body>
+<!--
+  CARA MENGEDIT SLAID
+  - Setiap slaid ialah <section class="slide">. Tajuk menu diambil daripada <h1>/<h2> atau data-title.
+  - data-module="..." + data-accent="vue|blue|indigo|amber|teal" pada slaid pembahagi; slaid seterusnya mewarisi.
+  - data-cp="03" memaparkan badge "checkpoint 03" di penjuru kanan atas.
+  - Kod: <textarea class="code" data-lang="js|bash|yaml|docker|nginx|json|text" data-title="..." data-hl="2,4-6">...</textarea>
+    (tulis kod terus, tanpa &lt; — textarea tidak memproses tag HTML)
+  - class="step" = didedahkan satu demi satu dengan kekunci →.
+  - <aside class="notes"> = nota penceramah (hanya dalam paparan penceramah, tekan P).
+  - Jalur "Giliran anda": data-giliran="apa perlu dibuat" data-fail="..." data-minit="10" (+ data-jenis="cuba" / "tunjuk").
+  - Teks kaki setiap slaid: data-footer pada <div class="stage"> di bawah.
+  - Pautan: <a href="https://...">teks</a>. deck.js menambah ikon ↗ dan membukanya dalam tab baharu.
+  - JADUAL HARI INI: senarai JSON di bawah (id="jadual"). Satu sumber untuk slaid agenda, slaid rehat,
+    masa pada slaid modul dan menu (M).
+-->
+<script type="application/json" id="jadual">
+[
+  { "id": "daftar", "masa": "09:30", "tajuk": "Pendaftaran & pembukaan",        "warna": "vue" },
+  { "id": "m1",     "masa": "10:00", "modul": "Modul 1", "tajuk": "PM2",               "warna": "teal" },
+  { "id": "m2",     "masa": "10:08", "modul": "Modul 2", "tajuk": "Nginx",             "warna": "teal" },
+  { "id": "m3",     "masa": "10:20", "modul": "Modul 3", "tajuk": "Docker",            "warna": "blue" },
+  { "id": "rehat",  "masa": "10:45", "tajuk": "Rehat",                           "rehat": true },
+  { "id": "m4",     "masa": "11:00", "modul": "Modul 4", "tajuk": "CI: GitHub Actions", "warna": "amber" },
+  { "id": "m5",     "masa": "11:35", "modul": "Modul 5", "tajuk": "CD & penyelenggaraan", "warna": "indigo" },
+  { "id": "tutup",  "masa": "12:05", "tajuk": "Penutup & soal jawab",            "warna": "vue" },
+  { "id": "tamat",  "masa": "12:15", "tajuk": "Tamat",                           "tamat": true }
+]
+</script>
+<div class="viewport">
+<div class="stage" data-footer="Bengkel Coaching Teknikal · Unijaya Resources Sdn Bhd">
+
+<!-- =====================================================================
+     PENDAFTARAN & PEMBUKAAN
+     ===================================================================== -->
+
+<section class="slide title-slide" data-title="Tajuk" data-module="Pembukaan" data-accent="vue" data-jadual="daftar">
+  <svg class="title-mark" viewBox="0 0 170 150" aria-hidden="true">
+    <rect width="170" height="150" rx="18" fill="#1565c0"/>
+    <circle cx="36" cy="75" r="16" fill="#42b883"/>
+    <circle cx="85" cy="75" r="16" fill="#fff" opacity=".92"/>
+    <circle cx="134" cy="75" r="16" fill="#fff" opacity=".55"/>
+    <rect x="52" y="71" width="17" height="8" rx="4" fill="#fff" opacity=".7"/>
+    <rect x="101" y="71" width="17" height="8" rx="4" fill="#fff" opacity=".7"/>
+    <rect x="22" y="112" width="126" height="10" rx="5" fill="#42b883"/>
+  </svg>
+  <img class="org-logo" src="img/unijaya-logo.png" alt="Unijaya Resources Sdn Bhd">
+  <span class="kicker">Bengkel Coaching Teknikal</span>
+  <h1>Deployment dan Penyelenggaraan Aplikasi Web</h1>
+  <p class="lead">PM2 · Nginx · Docker · <strong>CI/CD dengan GitHub Actions</strong>. Daripada laptop ke <em>server</em>, kemudian biar GitHub yang buat.</p>
+  <div class="event-info">
+    <div><span class="label">Tarikh</span><strong>28 Oktober 2026</strong></div>
+    <div><span class="label">Masa</span><strong>9:30 pagi hingga 12:15 tengah hari</strong></div>
+    <div><span class="label">Anjuran</span><strong>Unijaya Resources Sdn Bhd</strong></div>
+  </div>
+  <aside class="notes">
+    <ul>
+      <li>Welcome (1 min). Registration starts straight away on the next slide: the Codespaces take a few minutes to build, and you present while they do.</li>
+      <li>The promise: by 12:15, a <code>git push</code> from their own repo updates their own live app.</li>
+    </ul>
+  </aside>
+</section>
+
+<section class="slide" data-title="Agenda pagi ini">
+  <h2>Agenda pagi ini</h2>
+  <div class="timeline" data-jadual-senarai></div>
+  <p class="small muted mt-auto">Setiap modul: satu masalah, satu <em>command</em>, satu hasil yang anda nampak.</p>
+  <aside class="notes"><p>Point out that registration is part of the plan, not lost time: the opening talk happens while Codespaces build.</p></aside>
+</section>
+
+<section class="slide" data-title="Pendaftaran: GitHub &amp; Codespace" data-fail="github.com" data-minit="15"
+  data-giliran="ikut lima langkah di kiri. Panduan penuh: <code>checkpoints/00-mula</code>">
+  <h2>Pendaftaran: akaun GitHub &amp; Codespace</h2>
+  <div class="cols l-wide center-y">
+    <ol class="stack">
+      <li><a href="https://github.com/signup">github.com/signup</a>: daftar dengan e-mel peribadi, masukkan kod dari e-mel.</li>
+      <li>Buka <strong>repo templat bengkel</strong> (kod QR daripada fasilitator).</li>
+      <li><span class="kbd">Use this template</span> → <span class="kbd">Create a new repository</span> (bukan <em>Open in a codespace</em>) → nama <code>bengkel-deploy</code> → <strong>Private</strong> → <span class="kbd">Create repository</span>.</li>
+      <li><a href="https://github.com/settings/codespaces">github.com/settings/codespaces</a> → <strong>Default idle timeout</strong> <code>240</code> → <strong>Save</strong>. <em>Sebelum</em> cipta Codespace.</li>
+      <li>Dalam repo baharu anda: <span class="kbd">Code</span> → tab <span class="kbd">Codespaces</span> → <span class="kbd">Create codespace on main</span>.</li>
+    </ol>
+    <div class="stack">
+      <div class="callout tip"><strong>Codespace</strong> = komputer Linux di <em>cloud</em>, dibuka dalam <em>browser</em>. Tiada apa-apa perlu di-<em>install</em> pada laptop anda.</div>
+      <div class="callout"><strong>~3 – 5 minit kali pertama.</strong> Biarkan ia berjalan.</div>
+      <div class="callout warn small"><strong>Tersekat?</strong> Kod e-mel tidak sampai: semak <em>Spam</em>, atau guna e-mel peribadi. Panduan penuh: <code>checkpoints/00-mula</code>.</div>
+    </div>
+  </div>
+  <aside class="notes">
+    <ul>
+      <li>Press <code>Q</code> to show QR codes: first <code>github.com/signup</code>, then the template repo link. Do it in the presenter window so the projector shows the code full size.</li>
+      <li>Private repo: nobody else can trigger their self-hosted runner later.</li>
+      <li>As soon as most people have clicked <strong>Create codespace</strong>, move on. The next three slides fill the build time.</li>
+    </ul>
+  </aside>
+</section>
+
+<section class="slide" data-title="Deployment &amp; penyelenggaraan">
+  <h2>Apa itu <em>deployment</em> dan penyelenggaraan?</h2>
+  <p class="small muted">Penyelenggaraan = <em>maintenance</em></p>
+  <div class="grid-2 mt">
+    <div class="card accent">
+      <div class="big">🚚</div>
+      <h3><em>Deployment</em></h3>
+      <p>Membawa kod dari laptop anda ke <strong><em>server</em></strong>, supaya pengguna boleh menggunakannya.</p>
+    </div>
+    <div class="card accent">
+      <div class="big">🔧</div>
+      <h3>Penyelenggaraan</h3>
+      <p>Memastikan ia <strong>terus berjalan</strong>: hidup semula bila mati, tahu apa yang rosak, kemas kini dengan selamat, kembali ke versi lama jika perlu.</p>
+    </div>
+  </div>
+  <div class="callout mt">Masalah biasa: <em>"Di komputer saya boleh!"</em> · <em>deploy</em> ikut ingatan · lupa satu langkah · tiada siapa tahu versi mana yang sedang berjalan.</div>
+  <aside class="notes">
+    <ul>
+      <li>Ask: "How do you deploy today?" Expect FTP, copying folders, remote desktop. No judgement: that's why we're here.</li>
+      <li>Keep talking while Codespaces build. Glance at the room: hands up = stuck on email codes.</li>
+    </ul>
+  </aside>
+</section>
+
+<section class="slide" data-title="Demo: hasil akhir pagi ini">
+  <span class="kicker">Hasil akhir pagi ini</span>
+  <h2><code>git push</code> → 2 minit → aplikasi baharu di <em>server</em></h2>
+  <div class="flow big">
+    <div class="node"><strong>1. Ubah kod</strong>Tajuk aplikasi<br><code>git push</code></div>
+    <div class="arrow">→</div>
+    <div class="node"><strong>2. GitHub <em>test</em></strong>✅ Test &amp; build<br><span class="small muted">mesin GitHub</span></div>
+    <div class="arrow">→</div>
+    <div class="node"><strong>3. GitHub <em>deploy</em></strong>✅ Deploy<br><span class="small muted"><em>server</em> anda</span></div>
+    <div class="arrow">→</div>
+    <div class="node hot"><strong>4. Pengguna nampak</strong>Versi baharu<br><span class="small muted">tanpa sentuh <em>server</em></span></div>
+  </div>
+  <div class="mock mt" style="max-width: 860px; align-self: center">
+    <div class="bar">💻 Inventori Aset ICT · Jabatan Anda <span class="sp"></span>☾</div>
+    <div class="body" style="text-align: center; color: #6b7785; font-size: 14px">
+      Versi 0.0.1 · commit <code>a1b2c3d</code> · dibina 26 Okt 2026, 11:52 · <span class="chip ok">Production</span>
+    </div>
+  </div>
+  <aside class="notes">
+    <ul>
+      <li><strong>Live demo on your own repo (≤ 4 min):</strong> change the app bar title in <code>src/App.vue</code>, commit, push. Open the Actions tab: "Test &amp; build" then "Deploy ke server". Refresh your port 9000: new title, new commit in the footer.</li>
+      <li>Point at the footer: "this line tells us exactly what is running. You'll see it change on your own app at about 12:00."</li>
+      <li>Same app as the Vue workshop: no new app code to learn today.</li>
+    </ul>
+  </aside>
+</section>
+
+<section class="slide" data-title="Lima modul pagi ini">
+  <h2>Lima modul: setiap satu mengautomasikan yang sebelumnya</h2>
+  <table class="table">
+    <tr><th></th><th>Modul</th><th>Masalah yang diselesaikan</th><th><em>Command</em> utama</th><th>Hasil</th></tr>
+    <tr><td>1</td><td><strong>PM2</strong></td><td>API mati bila <em>terminal</em> ditutup</td><td><code>pm2 start</code></td><td>API sentiasa hidup</td></tr>
+    <tr><td>2</td><td><strong>Nginx</strong></td><td>Pengguna perlukan satu alamat</td><td><code>sudo nginx</code></td><td>Aplikasi di port 8080</td></tr>
+    <tr><td>3</td><td><strong>Docker</strong></td><td>"Di komputer saya boleh!"</td><td><code>docker compose up</code></td><td>Aplikasi di port 9000</td></tr>
+    <tr><td>4</td><td><strong>CI</strong></td><td>Kod rosak sampai ke pengguna</td><td><code>git push</code></td><td>✅ atau ❌</td></tr>
+    <tr><td>5</td><td><strong>CD</strong></td><td><em>Deploy</em> manual, lambat, mudah silap</td><td><code>git push</code></td><td>Versi baharu di <em>server</em></td></tr>
+  </table>
+  <div class="callout tip mt">Ketinggalan? Dalam <em>terminal</em>: <code>npm run checkpoint 03</code> (nombor yang disebut). Fail lama anda disimpan dalam <code>backup/</code>. Panduan setiap langkah: folder <code>checkpoints/</code>.</div>
+  <aside class="notes">
+    <ul>
+      <li>This is the one slide to remember. Come back to it at the end.</li>
+      <li>Each module ends with one sentence: "now let's automate that".</li>
+    </ul>
+  </aside>
+</section>
+
+<section class="slide" data-title="Codespace: server anda" data-fail="Terminal" data-minit="5"
+  data-giliran="<code>npm run semak</code>: tiga ✔ di atas = siap">
+  <h2>Codespace anda ialah <em>server</em> Linux</h2>
+  <div class="cols">
+    <div class="stack">
+      <textarea class="code lg" data-lang="bash" data-title="Terminal (bahagian bawah Codespace)">
+        npm run semak     # apa yang sedang berjalan?
+        uname -a          # Linux
+        whoami            # pengguna anda
+      </textarea>
+      <div class="callout small"><strong>Codespace dibuka semula?</strong> Tunggu 1 minit, kemudian <code>npm run semak</code>. Nginx, PM2, Docker dan <em>runner</em> dihidupkan semula sendiri.</div>
+    </div>
+    <div class="stack">
+      <p class="small muted">Port yang kita guna (tab <strong>PORTS</strong> di bawah, klik 🌐 untuk buka):</p>
+      <table class="table compact">
+        <tr><td><code>41730</code></td><td>Mod <em>development</em> (<code>npm start</code>)</td></tr>
+        <tr><td><code>3000</code></td><td>1 · API dalam PM2</td></tr>
+        <tr><td><code>8080</code></td><td>2 · Nginx</td></tr>
+        <tr><td><code>9000</code></td><td>3 · Docker, kemudian 5 · CD</td></tr>
+      </table>
+      <p class="small"><span style="color: #2e7d32">✔</span> berjalan · <span style="color: #c62828">✘</span> masalah · <span class="muted">·</span> belum (kita sampai nanti)</p>
+    </div>
+  </div>
+  <aside class="notes">
+    <ul>
+      <li>Target by 10:00: everyone sees ✔ Node.js, ✔ Package projek, ✔ Repo GitHub. Everything else shows "·" for now, and that's correct.</li>
+      <li>Anyone without a Codespace: pair with a neighbour now, catch up at the break.</li>
+      <li>The idle timeout (slide 3) only applies to Codespaces created after it is set. A stopped Codespace means a stopped runner in Module 5.</li>
+    </ul>
+  </aside>
+</section>
+
+<!-- =====================================================================
+     MODUL 1 · PM2
+     ===================================================================== -->
+
+<section class="slide section" data-module="Modul 1 · PM2" data-accent="teal" data-jadual="m1">
+  <span class="kicker">Modul 1</span>
+  <h1>PM2</h1>
+  <p class="lead">"Pastikan API sentiasa hidup."</p>
+  <div class="meta"><span class="pill" data-jadual-masa="m1">10:00 – 10:08</span><span class="pill">Checkpoint 01</span></div>
+  <div class="num">1</div>
+  <aside class="notes"><p>8 minutes. Keep it moving: one file, three commands, one demo.</p></aside>
+</section>
+
+<section class="slide" data-title="PM2: process manager" data-cp="01" data-minit="5"
+  data-giliran="<code>pm2 start ecosystem.config.cjs</code> → <code>pm2 ls</code>">
+  <h2>PM2: <em>process manager</em> untuk Node.js</h2>
+  <div class="cols code-wide">
+    <textarea class="code" data-lang="js" data-title="ecosystem.config.cjs" data-hl="4-8">
+      module.exports = {
+        apps: [
+          {
+            name: 'inventori-api',
+            script: 'node_modules/json-server/lib/bin.js',
+            args: 'db.json --port 3000',
+            autorestart: true,          // mati? hidup semula
+            max_memory_restart: '300M', // memori > 300M?
+          },
+        ],
+      }
+    </textarea>
+    <div class="stack">
+      <div class="callout warn small"><strong>Masalah:</strong> <code>npm run api</code> mati bila <em>terminal</em> ditutup, atau bila ia rosak.</div>
+      <textarea class="code" data-lang="bash" data-title="Terminal">
+        pm2 start ecosystem.config.cjs
+        pm2 ls
+        pm2 logs inventori-api
+      </textarea>
+      <p class="small muted">Keluar dari log: <span class="kbd">Ctrl</span> + <span class="kbd">C</span> (API terus berjalan)</p>
+    </div>
+  </div>
+  <aside class="notes">
+    <ul>
+      <li>The file is just "what to run, and what to do when it dies". Same command as <code>json-server db.json --port 3000</code>.</li>
+      <li><code>pm2 ls</code>: point at status <em>online</em> and the ↺ restart column.</li>
+      <li>Ctrl+C in <code>pm2 logs</code> only stops watching the log, not the API. People always worry about this.</li>
+    </ul>
+  </aside>
+</section>
+
+<section class="slide" data-title="Cuba: matikan API" data-cp="01" data-fail="Terminal" data-minit="3" data-jenis="cuba"
+  data-giliran="matikan API dengan <code>kill -9</code>, kemudian <code>pm2 ls</code>">
+  <h2>Cuba: matikan API dengan paksa</h2>
+  <div class="cols center-y">
+    <textarea class="code" data-lang="bash" data-title="Terminal">
+      # "rosakkan" API
+      kill -9 $(pm2 pid inventori-api)
+      # ↺ 1, status online
+      pm2 ls
+    </textarea>
+    <div class="stack">
+      <div class="callout tip"><strong>PM2 menghidupkannya semula dalam sesaat.</strong> <em>Column</em> ↺ = berapa kali ia telah dimulakan semula.</div>
+      <p class="small"><strong><em>Maintenance</em> dengan PM2:</strong></p>
+      <table class="table compact">
+        <tr><td><code>pm2 logs</code></td><td>Apa yang berlaku?</td></tr>
+        <tr><td><code>pm2 restart inventori-api</code></td><td>Selepas kod baharu</td></tr>
+        <tr><td><code>pm2 startup</code> + <code>pm2 save</code></td><td>Hidup sendiri selepas <em>server</em> di-<em>restart</em></td></tr>
+      </table>
+    </div>
+  </div>
+  <aside class="notes">
+    <ul>
+      <li>This is the "aha" of Module 1: the process came back by itself.</li>
+      <li>A high ↺ number in production = something is crashing repeatedly. Look at <code>pm2 logs</code>.</li>
+      <li><code>pm2 startup</code> needs systemd, which Codespaces doesn't have; our Codespace uses <code>pm2 resurrect</code> on start instead. Just mention it.</li>
+    </ul>
+  </aside>
+</section>
+
+<!-- =====================================================================
+     MODUL 2 · NGINX
+     ===================================================================== -->
+
+<section class="slide section" data-module="Modul 2 · Nginx" data-accent="teal" data-jadual="m2">
+  <span class="kicker">Modul 2</span>
+  <h1>Nginx</h1>
+  <p class="lead">"Satu alamat untuk pengguna."</p>
+  <div class="meta"><span class="pill" data-jadual-masa="m2">10:08 – 10:20</span><span class="pill">Checkpoint 02</span></div>
+  <div class="num">2</div>
+  <aside class="notes"><p>12 minutes. If you're behind, demo this module on the projector and let them run <code>npm run checkpoint 02</code> + the commands later.</p></aside>
+</section>
+
+<section class="slide" data-title="Nginx: satu alamat untuk semua" data-cp="02">
+  <h2>Nginx: satu alamat untuk fail aplikasi <em>dan</em> API</h2>
+  <div class="flow" style="margin: 6px 0 18px">
+    <div class="node"><strong><em>Browser</em></strong>port 8080</div>
+    <div class="arrow">→</div>
+    <div class="node hot"><strong>Nginx</strong>pintu masuk</div>
+    <div class="arrow">→</div>
+    <div class="node"><strong>/</strong>fail dalam<br><code>/var/www/inventori</code></div>
+    <div class="node" style="margin-left: 12px"><strong>/api/</strong>API dalam PM2<br><code>127.0.0.1:3000</code></div>
+  </div>
+  <textarea class="code sm" data-lang="nginx" data-title="deploy/nginx/inventori.conf" data-hl="4,6-8,10-12">
+    server {
+        listen 8080;
+        # 1. Fail aplikasi (hasil npm run build)
+        root /var/www/inventori;
+        # 2. /api/... → API dalam PM2
+        location /api/ {
+            proxy_pass http://127.0.0.1:3000/;
+        }
+        # 3. Halaman aplikasi → index.html
+        location / {
+            try_files $uri $uri/ /index.html;
+        }
+    }
+  </textarea>
+  <aside class="notes">
+    <ul>
+      <li>Only three ideas: where the files are, where the API is, and "unknown page → index.html" so Vue can show it.</li>
+      <li>The trailing <code>/</code> in <code>proxy_pass</code> strips <code>/api</code>: <code>/api/assets</code> becomes <code>/assets</code>.</li>
+      <li>The app always calls <code>/api/...</code> (dev: Vite forwards it; server: Nginx forwards it), so the app code never changes between laptop and server.</li>
+    </ul>
+  </aside>
+</section>
+
+<section class="slide" data-title="Nginx: langkah demi langkah" data-cp="02" data-minit="7"
+  data-giliran="lima <em>command</em> di atas, kemudian buka port <code>8080</code>">
+  <h2>Nginx, langkah demi langkah</h2>
+  <textarea class="code" data-lang="bash" data-title="Terminal">
+    npm run build                                             # 1. build → dist/
+    cp -r dist/. /var/www/inventori/                          # 2. salin fail
+    sudo cp deploy/nginx/inventori.conf /etc/nginx/conf.d/    # 3. konfigurasi
+    sudo nginx -t                                             # 4. semak
+    sudo nginx                                                # 5. mula
+  </textarea>
+  <div class="grid-2 mt">
+    <div class="callout tip">Port <code>8080</code> → <strong>Open in Browser</strong>. <em>Footer</em>: <span class="chip ok">Production</span></div>
+    <div class="step callout warn">
+      <strong>🧪 Cuba:</strong> <code>pm2 stop inventori-api</code> → <em>refresh</em> (F5) →
+      <strong>502 Bad Gateway</strong>. Nginx OK, API di belakangnya tidak.
+      <code>pm2 start inventori-api</code> → pulih.
+    </div>
+  </div>
+  <aside class="notes">
+    <ul>
+      <li>On a real server, steps 5 and reload are <code>sudo systemctl start nginx</code> / <code>reload nginx</code>. Codespaces has no systemd.</li>
+      <li>Always <code>nginx -t</code> before (re)loading: a typo would otherwise take the site down.</li>
+      <li>502 = "Nginx couldn't reach the thing behind it". The most common error they'll see in real life. First place to look: <code>pm2 ls</code>, then <code>/var/log/nginx/error.log</code>.</li>
+    </ul>
+  </aside>
+</section>
+
+<section class="slide" data-title="Setiap versi baharu: enam langkah">
+  <h2>Setiap kali ada versi baharu…</h2>
+  <div class="grid-3 mt">
+    <div class="card"><h3>1. <code>git pull</code></h3><p>Ambil kod</p></div>
+    <div class="card"><h3>2. <code>npm ci</code></h3><p>Install <em>package</em></p></div>
+    <div class="card"><h3>3. <code>npm test</code></h3><p><em>Test</em></p></div>
+    <div class="card"><h3>4. <code>npm run build</code></h3><p><em>Build</em></p></div>
+    <div class="card"><h3>5. <code>cp dist/…</code></h3><p>Salin fail</p></div>
+    <div class="card"><h3>6. <code>pm2 restart</code></h3><p>Mula semula</p></div>
+  </div>
+  <div class="callout warn mt"><strong>Lupa satu langkah = <em>server</em> rosak, atau masih versi lama.</strong> Dan <em>server</em> perlu Node.js, Nginx dan PM2 yang betul. Mari automasikan.</div>
+  <aside class="notes">
+    <ul>
+      <li>Ask: "Who has forgotten one of these on a Friday afternoon?"</li>
+      <li>Bridge: Docker fixes "the server must have exactly the right software". CI/CD fixes "six manual steps".</li>
+    </ul>
+  </aside>
+</section>
+
+<!-- =====================================================================
+     MODUL 3 · DOCKER
+     ===================================================================== -->
+
+<section class="slide section" data-module="Modul 3 · Docker" data-accent="blue" data-jadual="m3">
+  <span class="kicker">Modul 3</span>
+  <h1>Docker</h1>
+  <p class="lead">"Bungkus semuanya, jalan di mana-mana."</p>
+  <div class="meta"><span class="pill" data-jadual-masa="m3">10:20 – 10:45</span><span class="pill">Checkpoint 03</span></div>
+  <div class="num">3</div>
+  <aside class="notes"><p>25 minutes. Start the build early (it takes ~2 minutes the first time), and explain the files while it runs.</p></aside>
+</section>
+
+<section class="slide" data-title="Image, container, Compose">
+  <h2>Tiga perkataan sahaja</h2>
+  <div class="grid-3 mt">
+    <div class="card accent"><div class="big">📦</div><h3><em>Image</em></h3><p>Kotak yang sudah dibungkus: aplikasi + Node.js/Nginx + konfigurasi. Resipinya: <code>Dockerfile</code>.</p></div>
+    <div class="card accent"><div class="big">▶️</div><h3><em>Container</em></h3><p>Kotak itu sedang <strong>berjalan</strong>. Satu <em>image</em> boleh menjadi banyak <em>container</em>.</p></div>
+    <div class="card accent"><div class="big">🎼</div><h3>Compose</h3><p>Beberapa <em>container</em> dimulakan bersama dengan satu <em>command</em>. Senarainya: <code>compose.yaml</code>.</p></div>
+  </div>
+  <div class="callout tip mt">Kita <em>build</em> <strong>dua</strong> <em>image</em>: <code>web</code> (Nginx + aplikasi Vue) dan <code>api</code> (json-server). Sama seperti Modul 1 &amp; 2, kini dalam kotak.</div>
+  <aside class="notes">
+    <ul>
+      <li>Analogy if needed: image = a frozen meal with instructions, container = the meal being eaten. Keep it short.</li>
+      <li>Tell them to run <code>npm run checkpoint 03</code> and <code>docker compose up -d --build</code> now, so the first build runs while you explain the next two slides.</li>
+    </ul>
+  </aside>
+</section>
+
+<section class="slide" data-title="Dockerfile: dua stage" data-cp="03">
+  <h2>Dockerfile web: dua <em>stage</em>, sama seperti Modul 2</h2>
+  <div class="cols code-wide">
+    <textarea class="code sm" data-lang="docker" data-title="Dockerfile" data-hl="2-8,11-13">
+      # Stage 1: build (npm ci + npm run build)
+      FROM node:22-alpine AS build
+      WORKDIR /app
+      COPY package.json package-lock.json ./
+      RUN npm ci
+      COPY . .
+      ARG COMMIT_SHA=docker
+      RUN npm run build
+
+      # Stage 2: Nginx + dist/
+      FROM nginx:1.30-alpine
+      COPY deploy/nginx/docker.conf /etc/nginx/conf.d/default.conf
+      COPY --from=build /app/dist /usr/share/nginx/html
+    </textarea>
+    <div class="stack">
+      <div class="callout"><strong><em>Stage</em> 1</strong> = <code>npm run build</code> dalam Modul 2</div>
+      <div class="callout"><strong><em>Stage</em> 2</strong> = salin <code>dist/</code> + konfigurasi Nginx dalam Modul 2</div>
+      <div class="callout tip small"><em>Image</em> akhir hanya Nginx + <code>dist/</code> (~100 MB). Node.js dan <code>node_modules</code> ditinggalkan.</div>
+      <p class="small muted"><code>api.Dockerfile</code>: Node + json-server, data dalam <code>/data</code>.</p>
+    </div>
+  </div>
+  <aside class="notes">
+    <ul>
+      <li>Read it as a recipe, top to bottom. Every line maps to something they typed in Module 2.</li>
+      <li>Why copy <code>package*.json</code> before the rest: Docker caches the slow <code>npm ci</code> step until the package list changes.</li>
+      <li><code>COMMIT_SHA</code> feeds the footer. Locally it says "docker"; in Module 5 GitHub fills in the real commit.</li>
+      <li><code>docker.conf</code> = the same Nginx config with three lines changed: <code>listen 80</code>, the root folder, and <code>proxy_pass http://api:3000/</code>.</li>
+    </ul>
+  </aside>
+</section>
+
+<section class="slide" data-title="compose.yaml: web + api" data-cp="03" data-minit="8"
+  data-giliran="<code>docker compose up -d --build</code>, kemudian buka port <code>9000</code>">
+  <h2>compose.yaml: dua <em>container</em>, satu <em>command</em></h2>
+  <div class="cols">
+    <textarea class="code sm" data-lang="yaml" data-title="compose.yaml (diringkaskan)" data-hl="5,9,14">
+      name: inventori
+      services:
+        web:
+          build: .
+          ports: ["9000:80"]      # browser → port 9000
+          depends_on: [api]
+        api:
+          build: { dockerfile: api.Dockerfile }
+          volumes: [data:/data]   # db.json kekal
+          # tiada ports: hanya web boleh sampai
+      volumes:
+        data:
+
+      # docker compose up -d --build
+    </textarea>
+    <div class="stack">
+      <textarea class="code" data-lang="bash" data-title="Terminal">
+        docker compose up -d --build   # build & mula
+        docker compose ps              # status
+        docker compose logs api        # log API
+      </textarea>
+      <div class="callout tip small">Port <code>9000</code> → <strong>Open in Browser</strong>. <em>Footer</em>: commit <code>docker</code></div>
+    </div>
+  </div>
+  <aside class="notes">
+    <ul>
+      <li>The real file has a few more lines (healthcheck, restart policy, COMMIT_SHA). Show it in the editor if there's time.</li>
+      <li>Service names are hostnames: inside Docker, Nginx reaches the API at <code>http://api:3000</code>.</li>
+      <li>The API has no published port: only <code>web</code> can talk to it. Smaller attack surface.</li>
+      <li><code>docker compose ps</code>: <code>api</code> shows <em>(healthy)</em> thanks to the HEALTHCHECK in <code>api.Dockerfile</code>.</li>
+    </ul>
+  </aside>
+</section>
+
+<section class="slide" data-title="Cuba: data kekal dalam volume" data-cp="03" data-minit="4" data-jenis="cuba"
+  data-giliran="tambah aset → <code>down</code> → <code>up -d</code> → aset masih ada?">
+  <h2>Cuba: <em>container</em> dibuang, data kekal</h2>
+  <div class="cols center-y">
+    <textarea class="code" data-lang="bash" data-title="Terminal">
+      # 1. Tambah satu aset (port 9000)
+      # 2. Buang container
+      docker compose down
+      # 3. Cipta semula
+      docker compose up -d
+      # 4. Refresh (F5): aset masih ada?
+    </textarea>
+    <div class="stack">
+      <div class="callout tip"><strong><em>Volume</em></strong> menyimpan <code>db.json</code> di luar <em>container</em>. <em>Container</em> baharu = data yang sama.</div>
+      <div class="callout">Kini <em>deploy</em> = <strong>satu <em>command</em></strong>: <code>docker compose up -d --build</code>.<br>Seterusnya: biar GitHub yang menaipnya.</div>
+    </div>
+  </div>
+  <aside class="notes">
+    <ul>
+      <li>This is why deploys can replace containers freely: data lives in the volume, not the container.</li>
+      <li><code>docker compose down -v</code> would delete the volume too. Don't run that one today.</li>
+      <li>Break next. Anyone whose build failed: <code>docker compose logs</code>, or catch up at the break with <code>npm run checkpoint 03</code>.</li>
+    </ul>
+  </aside>
+</section>
+
+<section class="slide break" data-title="Rehat" data-rehat="rehat" data-pilihan="10,15,20">
+  <div class="icon">☕</div>
+  <h1>Rehat</h1>
+  <aside class="notes"><p>Help anyone whose port 9000 isn't working yet. Everyone needs Docker working before Module 5.</p></aside>
+</section>
+
+<!-- =====================================================================
+     MODUL 4 · CI
+     ===================================================================== -->
+
+<section class="slide section" data-module="Modul 4 · CI" data-accent="amber" data-jadual="m4">
+  <span class="kicker">Modul 4</span>
+  <h1>CI dengan GitHub Actions</h1>
+  <p class="lead">"GitHub <em>test</em> setiap perubahan."</p>
+  <div class="meta"><span class="pill" data-jadual-masa="m4">11:00 – 11:35</span><span class="pill">Checkpoint 04</span></div>
+  <div class="num">4</div>
+  <aside class="notes"><p>35 minutes. The ❌ → ✅ exercise is the heart of this module: protect its time.</p></aside>
+</section>
+
+<section class="slide" data-title="CI: bila, di mana, apa">
+  <h2>CI: setiap <em>push</em> di-<em>test</em> secara automatik</h2>
+  <div class="flow big">
+    <div class="node"><strong>Anda</strong><code>git push</code></div>
+    <div class="arrow">→</div>
+    <div class="node"><strong>GitHub</strong>nampak fail dalam<br><code>.github/workflows/</code></div>
+    <div class="arrow">→</div>
+    <div class="node hot"><strong>Runner</strong>mesin Linux baharu<br>menjalankan langkah</div>
+    <div class="arrow">→</div>
+    <div class="node"><strong>Keputusan</strong>✅ lulus<br>❌ gagal + e-mel</div>
+  </div>
+  <div class="grid-3">
+    <div class="callout"><strong>BILA?</strong> <code>on: push</code></div>
+    <div class="callout"><strong>DI MANA?</strong> <code>runs-on: ubuntu-latest</code></div>
+    <div class="callout"><strong>APA?</strong> <code>steps:</code> <em>command</em> yang kita taip sendiri</div>
+  </div>
+  <aside class="notes">
+    <ul>
+      <li>Vocabulary: workflow (the file) → job (a group of steps on one machine) → steps (commands).</li>
+      <li>Runner = the machine that runs a job. Today: GitHub's machine for testing, and in Module 5 our own.</li>
+      <li>"Clean machine" is the point: if it passes there, it doesn't depend on something only installed on my laptop.</li>
+    </ul>
+  </aside>
+</section>
+
+<section class="slide" data-title="Workflow pertama" data-cp="04" data-minit="10"
+  data-giliran="commit &amp; push, kemudian tab <b>Actions</b> di GitHub">
+  <h2><em>Workflow</em> pertama: <code>.github/workflows/ci.yml</code></h2>
+  <div class="cols code-wide">
+    <textarea class="code xs" data-lang="yaml" data-title=".github/workflows/ci.yml" data-hl="2-4,7,15-20">
+      name: CI/CD
+      on:                    # BILA?
+        push:
+          branches: [main]
+      jobs:
+        test:
+          runs-on: ubuntu-latest   # DI MANA?
+          steps:                   # APA?
+            - name: Ambil kod (checkout)
+              uses: actions/checkout@v7
+            - name: Sediakan Node.js
+              uses: actions/setup-node@v7
+              with:
+                node-version: 22
+            - name: Install package
+              run: npm ci
+            - name: Test
+              run: npm test
+            - name: Build
+              run: npm run build
+    </textarea>
+    <div class="stack">
+      <textarea class="code" data-lang="bash" data-title="Terminal">
+        git add -A
+        git commit -m "Tambah CI"
+        git push
+      </textarea>
+      <div class="callout tip small">Repo anda di GitHub → tab <strong>Actions</strong> → klik <em>run</em> → klik <strong>Test &amp; build</strong> → buka setiap <em>step</em>.</div>
+      <div class="callout small"><code>uses:</code> = langkah siap guna (<em>action</em>) · <code>run:</code> = <em>command</em> <em>terminal</em></div>
+    </div>
+  </div>
+  <aside class="notes">
+    <ul>
+      <li>Read it with the BILA / DI MANA / APA labels. Steps 3–5 are exactly what they'd type themselves.</li>
+      <li><code>npm ci</code> vs <code>npm install</code>: ci installs exactly what's in package-lock.json, every time.</li>
+      <li>Wait for the first green tick together (~1 minute). Open the logs: every line of output is there.</li>
+      <li>If <code>git push</code> is refused with a message about "workflow" permission: create the file through the GitHub website instead (Add file → Create new file → <code>.github/workflows/ci.yml</code> → paste), then <code>git pull</code> in the Codespace. See the facilitator guide.</li>
+    </ul>
+  </aside>
+</section>
+
+<section class="slide" data-title="Cuba: pecahkan build" data-fail="src/utils/format.js" data-minit="12" data-jenis="cuba"
+  data-giliran="<code>2</code> → <code>0</code>, push, baca ❌, betulkan, push, ✅">
+  <h2>Cuba: pengurus mahu harga tanpa sen</h2>
+  <div class="cols">
+    <div class="stack">
+      <textarea class="code sm" data-lang="js" data-title="src/utils/format.js" data-hl="3-4">
+        export function formatPrice(value) {
+          return Number(value).toLocaleString('ms-MY', {
+            minimumFractionDigits: 0, // 2 → 0
+            maximumFractionDigits: 0, // 2 → 0
+          })
+        }
+      </textarea>
+      <ol class="small">
+        <li>Ubah <code>2</code> → <code>0</code> (dua baris), simpan, <em>commit</em>, <em>push</em>.</li>
+        <li class="step">Tab <strong>Actions</strong>: ❌ merah. Buka <em>step</em> <strong>Test</strong>. <em>Test</em> mana yang gagal?</li>
+        <li class="step">Kembalikan kepada <code>2</code>, <em>commit</em>, <em>push</em> → ✅ hijau.</li>
+      </ol>
+    </div>
+    <div class="stack">
+      <textarea class="code sm step" data-lang="text" data-title="Log step Test (GitHub Actions)">
+        × harga dipaparkan dengan sen:
+          4850 jadi 4,850.00
+        Expected: "4,850.00"
+        Received: "4,850"
+        Tests  3 failed | 10 passed
+      </textarea>
+      <div class="callout tip step"><strong><em>Test</em> menangkap perubahan sebelum ia sampai kepada pengguna.</strong> Jika perubahan itu memang dikehendaki, kemas kini <em>test</em> juga (<code>tests/format.test.js</code>).</div>
+    </div>
+  </div>
+  <aside class="notes">
+    <ul>
+      <li>Everyone does this. Reveal the log only after most people have a red X.</li>
+      <li>Point out the e-mail GitHub sends on failure, and the red X next to the commit on the repo's front page.</li>
+      <li>Reading CI logs is the real skill here: scroll to the first red line.</li>
+      <li>In Module 5 the deploy job has <code>needs: test</code>, so a red test means no deploy. That's the safety net.</li>
+    </ul>
+  </aside>
+</section>
+
+<!-- =====================================================================
+     MODUL 5 · CD & PENYELENGGARAAN
+     ===================================================================== -->
+
+<section class="slide section" data-module="Modul 5 · CD" data-accent="indigo" data-jadual="m5">
+  <span class="kicker">Modul 5</span>
+  <h1>CD &amp; Penyelenggaraan</h1>
+  <p class="lead">"GitHub <em>deploy</em> bila <em>test</em> lulus."</p>
+  <div class="meta"><span class="pill" data-jadual-masa="m5">11:35 – 12:05</span><span class="pill">Checkpoint 05</span></div>
+  <div class="num">5</div>
+  <aside class="notes"><p>30 minutes. Never cut this module: it's the payoff of the morning.</p></aside>
+</section>
+
+<section class="slide" data-title="Self-hosted runner" data-cp="05" data-minit="7"
+  data-giliran="salin token, kemudian <code>bash scripts/pasang-runner.sh TOKEN</code>">
+  <h2>Runner di <em>server</em> kita sendiri</h2>
+  <div class="flow" style="margin-bottom: 18px">
+    <div class="node"><strong>GitHub</strong>ada kerja <em>deploy</em></div>
+    <div class="arrow">⇠</div>
+    <div class="node hot"><strong>Runner</strong>dalam Codespace anda<br><span class="small">"Ada kerja untuk saya?"</span></div>
+    <div class="arrow">→</div>
+    <div class="node"><strong>Docker</strong><code>docker compose up</code></div>
+  </div>
+  <div class="cols">
+    <ol class="small stack">
+      <li>Repo anda → <strong>Settings</strong> → <strong>Actions</strong> → <strong>Runners</strong> → <span class="kbd">New self-hosted runner</span> → <strong>Linux</strong>, <strong>x64</strong></li>
+      <li>Salin <strong>token sahaja</strong> (klik dua kali padanya) daripada baris <code>./config.sh --url … --token <strong>XXXXX</strong></code></li>
+      <li>Dalam <em>terminal</em> Codespace:</li>
+    </ol>
+    <div class="stack">
+      <textarea class="code" data-lang="bash" data-title="Terminal">
+        bash scripts/pasang-runner.sh XXXXX
+      </textarea>
+      <div class="callout tip small">Kembali ke halaman <strong>Runners</strong>: status <strong>Idle</strong> 🟢</div>
+      <div class="callout warn small">Jangan jalankan <em>command</em> lain di halaman GitHub itu. Skrip kita buat semuanya.</div>
+    </div>
+  </div>
+  <aside class="notes">
+    <ul>
+      <li>The runner only connects <em>out</em> to GitHub and asks for work. Nothing connects in. That's why this works for servers behind an office firewall, where GitHub can't SSH in.</li>
+      <li>The token is valid for one hour and can only register a runner. Still, don't paste it in a chat.</li>
+      <li>The script downloads the runner, registers it and starts it in the background. <code>bash scripts/runner.sh status</code> / <code>log</code> if anything looks wrong.</li>
+    </ul>
+  </aside>
+</section>
+
+<section class="slide" data-title="Job deploy" data-cp="05" data-minit="10"
+  data-giliran="ubah tajuk, commit &amp; push, kemudian port <code>9000</code>">
+  <h2>Job kedua: <em>deploy</em> selepas <em>test</em> lulus</h2>
+  <div class="cols code-wide">
+    <textarea class="code sm" data-lang="yaml" data-title=".github/workflows/ci.yml · sambungan (diringkaskan)" data-hl="3,4,8">
+        deploy:
+          name: Deploy ke server
+          needs: test             # jika test lulus
+          runs-on: self-hosted    # di Codespace anda
+          steps:
+            - uses: actions/checkout@v7
+            - name: Build & jalankan container
+              run: docker compose up -d --build --wait
+              env:
+                COMMIT_SHA: ${{ github.sha }}
+            - name: Semak aplikasi berjalan
+              run: curl -fsS localhost:9000/version.json
+    </textarea>
+    <div class="stack">
+      <div class="callout"><strong><em>Command</em> yang sama</strong> seperti Modul 3. Bezanya: GitHub yang menaip.</div>
+      <ol class="small">
+        <li>Ubah tajuk dalam <code>src/App.vue</code> (<code>v-app-bar-title</code>)</li>
+        <li><code>git add -A &amp;&amp; git commit -m "Tajuk baharu" &amp;&amp; git push</code></li>
+        <li>Tab <strong>Actions</strong>: ✅ Test &amp; build → ✅ Deploy ke server</li>
+        <li class="step"><em>Refresh</em> port <code>9000</code>: tajuk baharu, commit baharu 🎉</li>
+      </ol>
+    </div>
+  </div>
+  <aside class="notes">
+    <ul>
+      <li>Three highlighted lines carry the whole idea: <code>needs</code> (only after tests), <code>runs-on: self-hosted</code> (on our server), and the Module 3 command.</li>
+      <li><code>--wait</code>: the step only succeeds when the containers are up. The <code>curl</code> step is a smoke test: if the app doesn't answer, the run turns red.</li>
+      <li>Wait until the whole room has the new title. Then ask: "how many manual steps did you do on the server?" Zero.</li>
+      <li>Combine with the previous module: break a test and push. Deploy is skipped (grey), production stays on the last good version.</li>
+    </ul>
+  </aside>
+</section>
+
+<section class="slide" data-title="Penyelenggaraan">
+  <h2>Penyelenggaraan (<em>maintenance</em>) dalam lima minit</h2>
+  <div class="grid-2">
+    <div class="card"><h3>↩️ Rosak selepas <em>deploy</em>?</h3><p><code>git revert HEAD --no-edit</code> + <code>git push</code>. CI/CD <em>deploy</em> semula versi sebelumnya.</p></div>
+    <div class="card"><h3>🔍 Apa yang berlaku?</h3><p><code>docker compose logs</code> · <code>pm2 logs</code> · sejarah tab <strong>Actions</strong>: siapa <em>deploy</em> apa, bila.</p></div>
+    <div class="card"><h3>♻️ Mati sendiri?</h3><p><code>restart: unless-stopped</code> (Docker) dan PM2 menghidupkannya semula. <code>healthcheck</code> memberitahu jika ia bermasalah.</p></div>
+    <div class="card"><h3>⬆️ Kemas kini <em>package</em>?</h3><p><strong>Dependabot</strong> membuka <em>pull request</em> setiap minggu, CI men-<em>test</em>-nya. Cuba di rumah: <code>CABARAN.md</code>.</p></div>
+  </div>
+  <aside class="notes">
+    <ul>
+      <li>If there's time, do the revert live: <code>git revert HEAD --no-edit && git push</code>, then watch the old title come back.</li>
+      <li>Rollback through git means the history always shows what's running and why.</li>
+    </ul>
+  </aside>
+</section>
+
+<section class="slide" data-title="GitLab: idea yang sama">
+  <h2>Pejabat anda guna GitLab? Idea yang sama</h2>
+  <table class="table compact">
+    <tr><th>GitHub Actions</th><th>GitLab CI/CD</th></tr>
+    <tr><td><code>.github/workflows/ci.yml</code></td><td><code>.gitlab-ci.yml</code></td></tr>
+    <tr><td>workflow → job → steps</td><td>pipeline → stage → job</td></tr>
+    <tr><td><code>runs-on: ubuntu-latest</code></td><td><code>image: node:22</code> (shared runner)</td></tr>
+    <tr><td><code>runs-on: self-hosted</code></td><td>GitLab Runner dengan <code>tags:</code></td></tr>
+    <tr><td><code>needs: test</code></td><td><code>stages: [test, deploy]</code></td></tr>
+    <tr><td>Secrets &amp; variables</td><td>CI/CD variables</td></tr>
+    <tr><td>Pull request</td><td>Merge request</td></tr>
+  </table>
+  <p class="small muted mt">Pipeline yang sama untuk GitLab: <code>rujukan/gitlab/.gitlab-ci.yml</code></p>
+  <aside class="notes">
+    <ul>
+      <li>Many government data centres run self-managed GitLab. Everything learned today transfers: only the file format changes.</li>
+      <li>Why GitHub today: free Codespaces as a server for everyone, and no phone/card verification to run pipelines.</li>
+    </ul>
+  </aside>
+</section>
+
+<!-- =====================================================================
+     PENUTUP
+     ===================================================================== -->
+
+<section class="slide" data-title="Apa yang anda kuasai pagi ini" data-module="Penutup" data-accent="vue" data-jadual="tutup">
+  <h2>Apa yang anda kuasai pagi ini</h2>
+  <div class="flow big" style="margin-top: 8px">
+    <div class="node"><strong>1 · PM2</strong>API sentiasa hidup<br><code>pm2 start</code></div>
+    <div class="arrow">→</div>
+    <div class="node"><strong>2 · Nginx</strong>satu alamat<br><code>sudo nginx</code></div>
+    <div class="arrow">→</div>
+    <div class="node"><strong>3 · Docker</strong>jalan di mana-mana<br><code>docker compose up</code></div>
+    <div class="arrow">→</div>
+    <div class="node"><strong>4 · CI</strong>setiap <em>push</em> di-<em>test</em><br><code>git push</code></div>
+    <div class="arrow">→</div>
+    <div class="node hot"><strong>5 · CD</strong><em>deploy</em> sendiri<br><code>git push</code></div>
+  </div>
+  <div class="grid-3 mt">
+    <div class="callout small"><strong>Seterusnya:</strong> <em>server</em> sebenar dengan domain &amp; HTTPS</div>
+    <div class="callout small"><strong>Seterusnya:</strong> simpan <em>image</em> dalam <em>registry</em> (ghcr.io)</div>
+    <div class="callout tip small"><strong>Di rumah:</strong> <code>CABARAN.md</code> (Dependabot, <em>badge</em> CI, lindungi <code>main</code>)</div>
+  </div>
+  <aside class="notes">
+    <ul>
+      <li>Back to the five-step picture: ask 2–3 people to explain one step each in their own words.</li>
+      <li>Housekeeping: their repo and Codespace are theirs to keep. Stop the Codespace when done (github.com/codespaces) to save free hours. Remove the runner if they won't use it again: see "Selepas bengkel" in <code>checkpoints/05-cd/README.md</code>.</li>
+    </ul>
+  </aside>
+</section>
+
+<section class="slide title-slide" data-title="Terima kasih">
+  <span class="kicker">Terima kasih</span>
+  <h1>Soalan?</h1>
+  <p class="lead">Repo anda, checkpoint dan slaid ini kekal di GitHub. Teruskan belajar!</p>
+  <p class="closing-org"><img src="img/unijaya-logo.png" alt=""> Bengkel Coaching Teknikal · Unijaya Resources Sdn Bhd</p>
+  <aside class="notes"><p>Q&amp;A. Collect feedback (press Q for a feedback form QR code).</p></aside>
+</section>
+
+</div>
+</div>
+<script src="vendor/qrcode.js"></script>
+<script src="deck.js"></script>
+</body>
+</html>
