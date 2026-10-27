@@ -201,7 +201,7 @@ npm run semak
 
 | Apa yang anda nampak | Apa yang perlu dibuat |
 |---|---|
-| `nothing to commit, working tree clean` | Fail belum disimpan. Tekan **Ctrl + S** pada fail itu, ulang `git add -A` dan `git commit` |
+| `nothing to commit, working tree clean` | Langkah 1 belum dibuat: taip `npm run checkpoint 04`. Atau fail belum disimpan: tekan **Ctrl + S** pada fail itu. Kemudian ulang `git add -A` dan `git commit` |
 | Tab **COMMIT_EDITMSG** terbuka selepas `git commit` | Anda terlupa `-m "mesej"`. Tulis mesej di baris pertama tab itu, tekan Ctrl + S, kemudian tutup tab itu |
 | `git push` ditolak: *"refusing to allow ... workflow"* | Codespace tidak dibenarkan menghantar fail *workflow*. Gunakan laman GitHub: (1) dalam Codespace, buka `ci.yml`, tekan **Ctrl + A** kemudian **Ctrl + C**; (2) repo anda di github.com → **Add file** → **Create new file**; (3) di kotak nama fail, taip `.github/workflows/ci.yml`; (4) klik dalam kotak besar, tekan **Ctrl + V**; (5) klik **Commit changes...**, kemudian **Commit changes**. Kemudian dalam *terminal*: `git pull --rebase`, kemudian `git push` |
 | `git push` ditolak: *"rejected ... fetch first"* | Ada perubahan di GitHub yang belum ada dalam Codespace. Taip `git pull --rebase`, kemudian `git push` |

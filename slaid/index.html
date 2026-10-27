@@ -219,7 +219,7 @@
 </section>
 
 <section class="slide" data-title="PM2: process manager" data-cp="01" data-minit="5"
-  data-giliran="<code>pm2 start ecosystem.config.cjs</code> → <code>pm2 ls</code>">
+  data-giliran="<code>npm run checkpoint 01</code> → <code>pm2 start ecosystem.config.cjs</code> → <code>pm2 ls</code>">
   <h2>PM2: <em>process manager</em> untuk Node.js</h2>
   <div class="cols code-wide">
     <textarea class="code" data-lang="js" data-title="ecosystem.config.cjs" data-hl="4-8">
@@ -238,6 +238,7 @@
     <div class="stack">
       <div class="callout warn small"><strong>Masalah:</strong> <code>npm run api</code> mati bila <em>terminal</em> ditutup, atau bila ia rosak.</div>
       <textarea class="code" data-lang="bash" data-title="Terminal">
+        npm run checkpoint 01
         pm2 start ecosystem.config.cjs
         pm2 ls
         pm2 logs inventori-api
@@ -331,9 +332,10 @@
 </section>
 
 <section class="slide" data-title="Nginx: langkah demi langkah" data-cp="02" data-minit="7"
-  data-giliran="lima <em>command</em> di atas, kemudian buka port <code>8080</code>">
+  data-giliran="enam <em>command</em> di atas (mula dengan <code>npm run checkpoint 02</code>), kemudian buka port <code>8080</code>">
   <h2>Nginx, langkah demi langkah</h2>
   <textarea class="code" data-lang="bash" data-title="Terminal">
+    npm run checkpoint 02                                     # 0. ambil fail
     npm run build                                             # 1. build → dist/
     cp -r dist/. /var/www/inventori/                          # 2. salin fail
     sudo cp deploy/nginx/inventori.conf /etc/nginx/conf.d/    # 3. konfigurasi
@@ -441,7 +443,7 @@
 </section>
 
 <section class="slide" data-title="compose.yaml: web + api" data-cp="03" data-minit="8"
-  data-giliran="<code>docker compose up -d --build</code>, kemudian buka port <code>9000</code>">
+  data-giliran="<code>npm run checkpoint 03</code> → <code>docker compose up -d --build</code> → buka port <code>9000</code>">
   <h2>compose.yaml: dua <em>container</em>, satu <em>command</em></h2>
   <div class="cols">
     <textarea class="code sm" data-lang="yaml" data-title="compose.yaml (diringkaskan)" data-hl="5,9,14">
@@ -462,6 +464,7 @@
     </textarea>
     <div class="stack">
       <textarea class="code" data-lang="bash" data-title="Terminal">
+        npm run checkpoint 03          # ambil fail
         docker compose up -d --build   # build & mula
         docker compose ps              # status
         docker compose logs api        # log API
@@ -550,7 +553,7 @@
 </section>
 
 <section class="slide" data-title="Workflow pertama" data-cp="04" data-minit="10"
-  data-giliran="commit &amp; push, kemudian tab <b>Actions</b> di GitHub">
+  data-giliran="<code>npm run checkpoint 04</code>, <em>commit</em> &amp; <em>push</em>, kemudian tab <b>Actions</b> di GitHub">
   <h2><em>Workflow</em> pertama: <code>.github/workflows/ci.yml</code></h2>
   <div class="cols code-wide">
     <textarea class="code xs" data-lang="yaml" data-title=".github/workflows/ci.yml" data-hl="2-4,7,15-20">
@@ -577,6 +580,7 @@
     </textarea>
     <div class="stack">
       <textarea class="code" data-lang="bash" data-title="Terminal">
+        npm run checkpoint 04   # ambil fail
         git add -A
         git commit -m "Tambah CI"
         git push
@@ -682,7 +686,7 @@
 </section>
 
 <section class="slide" data-title="Job deploy" data-cp="05" data-minit="10"
-  data-giliran="ubah tajuk, commit &amp; push, kemudian port <code>9000</code>">
+  data-giliran="<code>npm run checkpoint 05</code>, ubah tajuk, <em>commit</em> &amp; <em>push</em>, kemudian port <code>9000</code>">
   <h2>Job kedua: <em>deploy</em> selepas <em>test</em> lulus</h2>
   <div class="cols code-wide">
     <textarea class="code sm" data-lang="yaml" data-title=".github/workflows/ci.yml · sambungan (diringkaskan)" data-hl="3,4,8">
@@ -702,6 +706,7 @@
     <div class="stack">
       <div class="callout"><strong><em>Command</em> yang sama</strong> seperti Modul 3. Bezanya: GitHub yang menaip.</div>
       <ol class="small">
+        <li><code>npm run checkpoint 05</code> (tambah <em>job</em> <em>deploy</em> ke <code>ci.yml</code>)</li>
         <li>Ubah tajuk dalam <code>src/App.vue</code> (<code>v-app-bar-title</code>)</li>
         <li><code>git add -A &amp;&amp; git commit -m "Tajuk baharu" &amp;&amp; git push</code></li>
         <li>Tab <strong>Actions</strong>: ✅ Test &amp; build → ✅ Deploy ke server</li>

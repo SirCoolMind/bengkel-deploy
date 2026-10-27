@@ -170,6 +170,7 @@ npm run semak
 | Apa yang anda nampak | Apa yang perlu dibuat |
 |---|---|
 | `sudo nginx -t` tunjuk `[emerg]` dan nombor baris | Fail konfigurasi rosak. Taip `npm run checkpoint 02` untuk ambil fail asal, ulang Langkah 5 dan 6 |
+| `cp: cannot stat 'deploy/nginx/inventori.conf'` | Langkah 1 belum dibuat. Taip `npm run checkpoint 02`, kemudian ulang Langkah 5 |
 | `bind() to 0.0.0.0:8080 failed (98: Address already in use)` | Nginx sudah berjalan. Taip `sudo nginx -s reload` |
 | Port 8080: *"403 Forbidden"* atau *"500 Internal Server Error"* | Fail aplikasi belum disalin. Ulang Langkah 3 dan 4 |
 | Kotak merah *"status 502"* | API tidak berjalan. Taip `pm2 ls`; jika tiada atau *stopped*: `pm2 start ecosystem.config.cjs` |

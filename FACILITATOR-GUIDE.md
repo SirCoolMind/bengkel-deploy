@@ -154,8 +154,11 @@ Keys: `→`/`←`, number + `Enter`, `M` menu, `P` presenter view, `Q` QR code, 
 Changes from the Vue deck:
 - Code highlighting for `yaml`, `docker` and `nginx` (`data-lang`).
 - The checkpoint badge's progress bar has 5 steps (01–05).
-- **The band at the bottom** says `Ambil fail: npm run checkpoint NN` (where the files come from), not "Tak sempat?". In this
-  workshop the checkpoint is how everyone gets the files. 🧪 *Cuba sendiri* bands show no checkpoint.
+- **`npm run checkpoint NN` comes first.** In this workshop the checkpoint is how everyone gets the files, so it is the
+  first line of each module's *Terminal* box and the first item in its band (PM2, Nginx, Docker, CI, and the deploy
+  job). Skip it and the next command fails (`[PM2][ERROR] File ecosystem.config.cjs not found`). Say it out loud at the
+  start of every module. Bands that don't mention it end with `Ambil fail: npm run checkpoint NN`; 🧪 *Cuba sendiri*
+  bands show no checkpoint.
 - No Vue Playground buttons or live Vue demos.
 - The schedule (`<script id="jadual">` at the top) drives the agenda, the break slide and the module time pills.
 

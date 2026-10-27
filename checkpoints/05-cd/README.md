@@ -226,6 +226,7 @@ npm run semak
 
 | Apa yang anda nampak | Apa yang perlu dibuat |
 |---|---|
+| Tab **Actions** hanya ada **Test & build**, tiada **Deploy ke server** | `npm run checkpoint 05` (Bahagian B) belum dibuat. Taip `npm run checkpoint 05`, kemudian *commit* dan *push* semula |
 | **Deploy ke server**: *"Waiting for a runner to pick up this job"* | *Runner* tidak berjalan. Taip `bash scripts/runner.sh status`, kemudian `bash scripts/runner.sh mula`. Codespace tertutup? Buka semula |
 | **Deploy ke server** ❌ pada *step* **Build & jalankan container** | Klik *step* itu, baca baris merah pertama. Cuba sendiri: `docker compose up -d --build` |
 | **Deploy ke server** ❌ pada *step* **Semak aplikasi berjalan** | Aplikasi tidak menjawab di port 9000. Taip `docker compose ps` dan `docker compose logs api` |

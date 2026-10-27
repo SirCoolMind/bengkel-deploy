@@ -388,14 +388,15 @@
   //   data-giliran="apa yang perlu dibuat (boleh guna HTML)"  data-fail="src/App.vue"  data-minit="10"
   //   data-jenis="cuba"   eksperimen kecil, tiada checkpoint
   //   data-jenis="tunjuk" perhati sahaja, ikut jika sempat
-  //   data-cp (sedia ada) → "Ambil fail: npm run checkpoint 05" (kecuali data-jenis="cuba")
+  //   data-cp (sedia ada) → "Ambil fail: npm run checkpoint 05" (kecuali data-jenis="cuba", atau
+  //   data-giliran sudah menyebut npm run checkpoint: arahan itu sudah di depan, jangan ulang di hujung)
   function giliranHtml(s) {
     const jenis = s.dataset.jenis || 'taip'
     const label = { taip: '✍ Giliran anda', cuba: '🧪 Cuba sendiri', tunjuk: '👀 Tunjuk cara' }[jenis] || '✍ Giliran anda'
     const fail = s.dataset.fail ? `<code>${esc(s.dataset.fail)}</code> · ` : ''
     const minit = s.dataset.minit ? `<span class="g-minit">⏱ ~${esc(s.dataset.minit)} minit</span>` : ''
     // Bengkel ini: fail deploy datang daripada checkpoint (peserta tidak menaip fail konfigurasi)
-    const cp = s.dataset.cp && jenis !== 'cuba'
+    const cp = s.dataset.cp && jenis !== 'cuba' && !s.dataset.giliran.includes('npm run checkpoint')
       ? `<span class="g-cp">Ambil fail: <b>npm run checkpoint ${esc(s.dataset.cp)}</b></span>`
       : ''
     return `<span class="g-label">${label}</span><span class="g-text">${fail}${s.dataset.giliran}</span>${minit}${cp}`

@@ -46,3 +46,6 @@ First version: a morning workshop (09:30–12:15) on deploying the Inventori Ase
   opens the link on the phone, not the laptop). Title slide date: 28 Oktober 2026.
 - GitHub's green **Code** menu no longer has a **Codespaces** tab. Slide 3, tutorial 00 (Langkah 4) and the facilitator
   guide now open the Codespace from `github.com/codespaces/new` → own repo → **Create codespace**.
+- `npm run checkpoint NN` is now the first command on each module's slide (terminal box and band), not only at the
+  far right of the band: following slide 9 without it gave `File ecosystem.config.cjs not found`. Tutorials 02, 04
+  and 05 gained a problem-table row for a skipped checkpoint (01 and 03 already had one).
