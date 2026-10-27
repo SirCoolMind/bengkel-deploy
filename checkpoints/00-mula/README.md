@@ -10,7 +10,7 @@ Pada akhir bahagian ini, anda ada:
 
 > 💡 **Cara paling mudah membaca panduan ini:** buka panduan ini di github.com. Setiap kotak kod di GitHub ada
 > butang **salin** (ikon dua segi empat) di sebelah kanan. Klik butang itu, kemudian *paste* dalam *terminal*.
-> - **Sebelum Langkah 2:** baca di repo templat (*link* daripada fasilitator) → folder `checkpoints` → `00-mula` → `README.md`.
+> - **Sebelum Langkah 2:** buka `url.unijaya.com/bengkel-deploy-template` (repo templat) → folder `checkpoints` → `00-mula` → `README.md`.
 > - **Selepas Langkah 2:** baca di repo **anda** (folder yang sama).
 
 ---
@@ -40,7 +40,10 @@ Pada akhir bahagian ini, anda ada:
 
 *Repo* (*repository*) = folder projek anda di GitHub. Kita salin projek bengkel ke dalam akaun anda.
 
-1. Buka *link* templat bengkel yang diberi oleh fasilitator (imbas kod QR di skrin).
+1. Dalam *browser* laptop anda (Chrome atau Edge), klik *address bar* (kotak alamat di bahagian paling atas),
+   taip `url.unijaya.com/bengkel-deploy-template`, kemudian tekan **Enter**. *Link* ini juga tertulis di skrin.
+
+   Anda akan nampak halaman repo **SirCoolMind/bengkel-deploy** di GitHub. Ini repo templat bengkel.
 2. Klik butang hijau **Use this template** (kanan atas), kemudian pilih **Create a new repository**.
 
    > ⚠ **Jangan** pilih **Open in a codespace**. Pilihan itu membuka templat fasilitator, bukan repo anda.

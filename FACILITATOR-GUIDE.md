@@ -85,7 +85,7 @@ break), then shorten the ❌ → ✅ exercise. **Never cut Module 5.**
 
 | Min | Participants | You |
 |---|---|---|
-| 0–10 | Sign up at github.com/signup, enter the e-mail code | Slide 3. Press `Q` for QR codes: first `github.com/signup`, then the template repo |
+| 0–10 | Sign up at github.com/signup, enter the e-mail code | Slide 3. Both links are on the slide: `github.com/signup`, then `url.unijaya.com/bengkel-deploy-template` (the template repo). Read them out. No QR codes: a phone scan opens the link on the phone, not the laptop |
 | 10–15 | Use this template → Private; **idle timeout 240** at github.com/settings/codespaces; then Create codespace | Walk the room. Watch for **Open in a codespace** (wrong: opens the template) |
 | 15–25 | Codespace builds (~3 – 5 min) | Slides 4–6: what deployment is, **live demo**, the five modules |
 | 25–30 | `npm run semak`: three ✔ | Slide 7. Pair anyone stuck with a neighbour |
@@ -111,7 +111,9 @@ created after the change. With the 15-minute break, the default 30 minutes is al
    ```
 
    The template must be **public** (or participants must have access) so "Use this template" works.
-3. Make a short link for slide 3's QR code (e.g. `bit.ly/...`): short links scan more easily.
+3. Point a short link at the repo. This run: `url.unijaya.com/bengkel-deploy-template` →
+   `https://github.com/SirCoolMind/bengkel-deploy`. The short link is written on slide 3 and in tutorial 00 (Langkah 2),
+   so if the repo moves, change the redirect, not the material.
 
 ### 1–2 weeks before: full dry run on a fresh GitHub account
 Do the whole morning as a participant would, on a **new** account, from a Windows office laptop if you can.

@@ -41,3 +41,6 @@ First version: a morning workshop (09:30–12:15) on deploying the Inventori Ase
   is pasted wrongly (whole line, too short, placeholder).
 - Codespace: "Open in Browser" pop-ups for ports 41730/8080/9000, guides open as formatted pages, one folder per row
   in the Explorer. App footer chip says **Production** / **Development**. Dockerfile build stage renamed `build`.
+- **Published (28 Oct):** template repo `github.com/SirCoolMind/bengkel-deploy`, short link
+  `url.unijaya.com/bengkel-deploy-template`. Slide 3 and tutorial 00 give that link instead of a QR code (a phone scan
+  opens the link on the phone, not the laptop). Title slide date: 28 Oktober 2026.
