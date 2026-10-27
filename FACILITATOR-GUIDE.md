@@ -86,7 +86,7 @@ break), then shorten the ❌ → ✅ exercise. **Never cut Module 5.**
 | Min | Participants | You |
 |---|---|---|
 | 0–10 | Sign up at github.com/signup, enter the e-mail code | Slide 3. Both links are on the slide: `github.com/signup`, then `url.unijaya.com/bengkel-deploy-template` (the template repo). Read them out. No QR codes: a phone scan opens the link on the phone, not the laptop |
-| 10–15 | Use this template → Private; **idle timeout 240** at github.com/settings/codespaces; then Create codespace | Walk the room. Watch for **Open in a codespace** (wrong: opens the template) |
+| 10–15 | Use this template → Private; **idle timeout 240** at github.com/settings/codespaces; then github.com/codespaces/new → their own repo → Create codespace | Walk the room. Watch for **Open in a codespace**, and for `SirCoolMind/bengkel-deploy` picked in the repository list: both open the template. (GitHub's green **Code** menu no longer has a Codespaces tab, hence the direct page.) |
 | 15–25 | Codespace builds (~3 – 5 min) | Slides 4–6: what deployment is, **live demo**, the five modules |
 | 25–30 | `npm run semak`: three ✔ | Slide 7. Pair anyone stuck with a neighbour |
 

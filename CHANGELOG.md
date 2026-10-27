@@ -44,3 +44,5 @@ First version: a morning workshop (09:30–12:15) on deploying the Inventori Ase
 - **Published (28 Oct):** template repo `github.com/SirCoolMind/bengkel-deploy`, short link
   `url.unijaya.com/bengkel-deploy-template`. Slide 3 and tutorial 00 give that link instead of a QR code (a phone scan
   opens the link on the phone, not the laptop). Title slide date: 28 Oktober 2026.
+- GitHub's green **Code** menu no longer has a **Codespaces** tab. Slide 3, tutorial 00 (Langkah 4) and the facilitator
+  guide now open the Codespace from `github.com/codespaces/new` → own repo → **Create codespace**.

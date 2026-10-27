@@ -1,5 +1,5 @@
 // GitHub Codespaces: "server" Linux untuk setiap peserta, dalam browser, tiada apa-apa perlu di-install.
-// Code → Codespaces → Create codespace on main. Kali pertama mengambil masa ~3 – 5 minit.
+// github.com/codespaces/new → pilih repo anda → Create codespace. Kali pertama mengambil masa ~3 – 5 minit.
 {
   "name": "Bengkel Deploy: Inventori Aset ICT",
   "image": "mcr.microsoft.com/devcontainers/javascript-node:1-22-bookworm",

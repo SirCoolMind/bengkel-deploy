@@ -75,11 +75,15 @@ Codespace berhenti sendiri selepas 30 minit tanpa aktiviti. Kita panjangkan kepa
 
 ## Langkah 4: buka Codespace (~3 – 5 minit, kebanyakannya menunggu)
 
-1. Kembali ke tab repo anda (`username-anda/bengkel-deploy`).
-2. Klik butang hijau **Code** (di atas senarai fail).
-3. Klik tab **Codespaces** (sebelah tab **Local**).
-4. Klik **Create codespace on main**.
-5. Tab baharu dibuka: *"Setting up your codespace"*. Tunggu 1 – 3 minit.
+1. Buka https://github.com/codespaces/new (taip di *address bar*, tekan **Enter**).
+   Halaman **Create a new codespace** dibuka.
+2. Di bahagian **Repository**, klik butang **Select a repository**, kemudian taip `bengkel-deploy`.
+3. Dalam senarai, klik repo yang ada **nama anda**: `username-anda/bengkel-deploy`.
+
+   > ⚠ **Jangan** pilih `SirCoolMind/bengkel-deploy`. Itu repo templat fasilitator, bukan repo anda.
+
+4. Biarkan pilihan lain seperti asal (**Branch** mesti `main`). Klik butang hijau **Create codespace**.
+5. Halaman *"Setting up your codespace"* dibuka. Tunggu 1 – 3 minit.
 6. Skrin seperti VS Code muncul. Ia ada tiga bahagian utama:
    - **Kiri:** senarai fail (*Explorer*).
    - **Tengah:** fail yang dibuka (panduan `README.md` dibuka sendiri).
@@ -94,7 +98,9 @@ Codespace berhenti sendiri selepas 30 minit tanpa aktiviti. Kita panjangkan kepa
 
 | Masalah | Penyelesaian |
 |---|---|
-| Tiada tab **Codespaces** atau butang **Create codespace** | Semak kiri atas halaman: mesti tertulis `username-anda/bengkel-deploy`. Jika nama lain, anda di repo templat: ulang Langkah 2 |
+| Repo anda tiada dalam senarai **Repository** | Repo anda belum dicipta. Buat Langkah 2 dahulu, kemudian *refresh* halaman ini (tekan F5) dan cuba lagi |
+| Halaman log masuk GitHub muncul | Log masuk dengan akaun daripada Langkah 1, kemudian buka https://github.com/codespaces/new semula |
+| Butang **Code** hijau di repo anda tiada pilihan **Codespaces** | Betul, GitHub sudah mengubah menu itu. Guna https://github.com/codespaces/new seperti langkah 1 di atas |
 | Skrin *"Oh no, it looks like you are offline"* | Internet terputus. *Refresh* halaman (tekan F5) |
 | Tiada *terminal* di bawah | Tekan **Ctrl + `** (kekunci di kiri nombor 1), atau menu ☰ (kiri atas) → **Terminal** → **New Terminal** |
 

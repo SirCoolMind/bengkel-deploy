@@ -54,7 +54,7 @@ installing Nginx/PM2), the facilitator runs the opening on the projector, so the
 | Min | Participants | Facilitator (projector) |
 |---|---|---|
 | 0–10 | Create a GitHub account at github.com/signup, enter the code sent to their email | Welcome. Both links are on slide 3: the sign-up link and the template repo (`url.unijaya.com/bengkel-deploy-template`) |
-| 10–15 | Template repo → **Use this template** → **Private** repo → **Code → Codespaces → Create codespace** | Walk the room, help with email codes |
+| 10–15 | Template repo → **Use this template** → **Private** repo → **github.com/codespaces/new → own repo → Create codespace** | Walk the room, help with email codes |
 | 15–25 | (Codespace is building, nothing to do) | **Opening demo**: push a change → live in 2 minutes. The 5-step picture. |
 | 25–30 | Terminal: `npm run semak` → green ticks. Settings → Codespaces → idle timeout **240 minutes** | Hands up when green. Pair anyone stuck with a neighbour |
 
