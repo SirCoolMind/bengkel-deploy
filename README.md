@@ -7,6 +7,9 @@ dari laptop ke *server*, kemudian membiarkan GitHub men-*test* dan men-*deploy* 
 
 > **Mula di sini:** `checkpoints/00-mula/README.md`. Setiap langkah bengkel ada panduan sendiri dalam
 > folder `checkpoints/`, langkah demi langkah.
+>
+> **Slaid bengkel:** https://sircoolmind.github.io/bengkel-deploy/slaid/ (buka dalam *browser*, tidak perlu
+> *install* apa-apa). Dalam Codespace, anda juga boleh taip `npm run slaid` (port 41700).
 
 ---
 
