@@ -15,7 +15,7 @@
   const slides = Array.from(stage.querySelectorAll(':scope > .slide'))
   const W = 1280
   const H = 720
-  const LANGKAH = 5 // checkpoint 01–05: PM2, Nginx, Docker, CI, CD (06 = jawapan cabaran)
+  const LANGKAH = 5 // checkpoint 01–05: PM2, Nginx, Docker, CI, CD (06 = jawapan cabaran, 07 = bonus: aplikasi anda)
 
   let index = 0
   let stepIndex = 0

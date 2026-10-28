@@ -8,6 +8,9 @@ backup
 # "Pangkalan data" semasa pembangunan: dicipta daripada db.seed.json (npm run reset-db)
 db.json
 
+# Checkpoint 07: salinan aplikasi Bengkel Vue anda (npm run app-saya menyalinnya ke src/)
+/app-saya/
+
 # Fail rahsia: JANGAN masukkan ke dalam git
 .env
 .env.*

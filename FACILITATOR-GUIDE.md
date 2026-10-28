@@ -23,7 +23,7 @@ deploy is visible. The payoff at ~12:00: change the title, `git push`, refresh, 
 |---|---|
 | `src/`, `index.html`, `public/` | The app (Vue workshop checkpoint 14) + the version footer (`src/build-info.js`). `formatPrice`/`formatDate` and the form rules moved to `src/utils/` so they can be tested. The app calls `/api/...` everywhere: Vite proxies it in dev, Nginx in production. |
 | `tests/` | 13 Vitest unit tests (format, validation rules, API service with a fake `fetch`). CI runs them. |
-| `checkpoints/00…06/` | Each folder holds **all** deployment files at that step + a BM `README.md`. Participants don't type config files; they run `npm run checkpoint NN` and read/run. |
+| `checkpoints/00…07/` | Each folder holds **all** deployment files at that step + a BM `README.md`. Participants don't type config files; they run `npm run checkpoint NN` and read/run. |
 | `scripts/checkpoint.js` | Backs up the current deployment files to `backup/<time>/`, removes them (and emptied folders), copies the checkpoint's files. Managed files = every file that appears in any checkpoint. Never touches `src/`. Reminds them to commit & push when `.github/` files change. |
 | `scripts/semak.js` | `npm run semak`: ✔/✘/· status for Node, packages, GitHub remote, then one line per module (PM2 on 3000, Nginx on 8080, Docker on 9000 with the served commit, ci.yml pushed, runner running). `·` = "not there yet", not an error. |
 | `scripts/pasang-runner.sh` | Downloads actions/runner 2.338.1, installs its dependencies, registers it for the repo (`$GITHUB_REPOSITORY` in Codespaces) with the token they paste, and starts it. |
@@ -32,8 +32,9 @@ deploy is visible. The payoff at ~12:00: change the title, `git push`, refresh, 
 | `scripts/start.js` | `npm start`: json-server (41780) + Vite (41730) together, prints the Codespace URL. |
 | `scripts/slaid.js` | `npm run slaid`: serves `slaid/` on port 41700, so participants can open the deck in their Codespace and use the **Salin** buttons. |
 | `rujukan/gitlab/` | The checkpoint 05 pipeline as `.gitlab-ci.yml` + a BM README (term mapping, registering a GitLab Runner). Reference only. |
-| `slaid/` | The deck: 31 slides, BM, English speaker notes. Same engine as the Vue workshop. |
+| `slaid/` | The deck: 32 slides, BM, English speaker notes. Same engine as the Vue workshop. |
 | `CABARAN.md` | Homework (Dependabot, CI badge, protect `main`). Answers in checkpoint 06. |
+| `checkpoints/07-app-anda/`, `scripts/app-saya.js` | Bonus: deploy the participant's **own** Vue workshop app. `npm run checkpoint 07` adds an `app-saya/` drop folder (git-ignored, Docker-ignored). They drag their laptop's `src` folder onto it (or upload `src.zip`), then `npm run app-saya`: backs up `src/`, copies their files over it (keeps `src/utils/` and `src/build-info.js`, so the tests still run), rewrites `import.meta.env.VITE_API_URL` to `(import.meta.env.VITE_API_URL \|\| '/api')`, then runs `npm test` and `npm run build`. Then commit + push as in Module 5. |
 | `RANGKA-KANDUNGAN.md` | The approved content outline (v3). This guide supersedes it where they differ. |
 | `scripts/release.js` | `npm run release` → `../vue-deploy-workshop-releases/vue-deploy-workshop-v<version>.zip` |
 
@@ -210,6 +211,15 @@ Changes from the Vue deck:
 - Wait until the whole room has the new title. "How many manual steps on the server?" Zero.
 - **Penyelenggaraan (slide 28):** rollback = `git revert HEAD --no-edit && git push`. Do it live if time allows.
   Combine with Module 4: break a test and push; Deploy is skipped and production stays on the last good version.
+
+### Bonus · aplikasi anda sendiri (slide 30, checkpoint 07)
+- For fast finishers, or homework. Guide: `checkpoints/07-app-anda/README.md`.
+- The only real change between their laptop and the server is the API address: in the Vue workshop `start.bat` set
+  `VITE_API_URL` to json-server on 41780. `npm run app-saya` makes it fall back to `/api` (Vite proxy in dev, Nginx
+  in production).
+- Tested locally with the Vue workshop's checkpoint 15 (lokasi challenge) and checkpoint 08 (API calls inside
+  `App.vue`), both as a dragged folder and as `src.zip`: 13/13 tests and the build pass, and the built app calls
+  `/api`. Not yet tried in a real Codespace: check the folder drag-and-drop in your dry run (fallback: zip + **Upload...**).
 
 ---
 

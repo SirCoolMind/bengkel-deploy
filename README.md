@@ -74,6 +74,7 @@ folder `backup/`. Kod aplikasi (`src/`) tidak disentuh. *Command* itu menunjukka
 | 04 | CI | `.github/workflows/ci.yml` |
 | 05 | CD | `.github/workflows/ci.yml` (+ *job* `deploy`) |
 | 06 | Jawapan cabaran | `.github/dependabot.yml`, `ci.yml` |
+| 07 | Bonus: aplikasi Bengkel Vue anda | `app-saya/` (letak folder `src` anda di sini), `.dockerignore` |
 
 Fail dalam `.github/` hanya berkesan selepas anda *commit* dan *push* (lihat bahagian 3).
 
@@ -99,13 +100,14 @@ Fail dalam `.github/` hanya berkesan selepas anda *commit* dan *push* (lihat bah
 | `npm run slaid` | Buka slaid bengkel di port 41700 |
 | `bash scripts/pasang-runner.sh TOKEN` | *Install* *self-hosted runner* (Modul 5) |
 | `bash scripts/runner.sh status` | *Runner* berjalan? (juga: `mula`, `henti`, `log`) |
+| `npm run app-saya` | Salin aplikasi Bengkel Vue anda (dalam `app-saya/`) ke `src/`, kemudian *test* dan *build* (checkpoint 07) |
 
 ## 7. Struktur folder
 
 ```
 src/                  ← aplikasi Inventori Aset ICT (tidak berubah sepanjang bengkel)
 tests/                ← unit test (npm test), dijalankan oleh CI
-checkpoints/          ← fail deploy bagi setiap langkah (00 hingga 06), setiap satu ada README.md (panduan)
+checkpoints/          ← fail deploy bagi setiap langkah (00 hingga 07), setiap satu ada README.md (panduan)
 scripts/              ← checkpoint.js, semak.js, pasang-runner.sh, runner.sh, ...
 .devcontainer/        ← tetapan Codespace (Node.js, Docker, Nginx, PM2)
 rujukan/gitlab/       ← pipeline yang sama untuk GitLab
@@ -137,6 +139,7 @@ menjalankan `npm run checkpoint`.
 - Repo dan Codespace ialah milik anda. **Stop** Codespace bila selesai: https://github.com/codespaces →
   **⋯** → **Stop codespace**. Akaun percuma ada 120 *core hours* sebulan (≈ 60 jam penggunaan Codespace 2-core).
 - Tidak mahu guna *runner* lagi? Lihat `checkpoints/05-cd`, bahagian *Selepas bengkel*.
+- *Deploy* aplikasi Bengkel Vue anda sendiri: `checkpoints/07-app-anda/README.md`.
 - Latihan di rumah: `CABARAN.md`.
 
 ## 10. Kamus ringkas

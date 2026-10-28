@@ -1,0 +1,12 @@
+# Fail yang TIDAK dihantar kepada Docker semasa build image
+node_modules
+dist
+backup
+db.json
+.env
+.git
+checkpoints
+slaid
+
+# Bonus checkpoint 07: salinan aplikasi Bengkel Vue anda (sudah disalin ke src/ oleh npm run app-saya)
+app-saya

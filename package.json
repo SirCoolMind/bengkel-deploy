@@ -16,6 +16,7 @@
     "test": "vitest run",
     "semak": "node scripts/semak.js",
     "checkpoint": "node scripts/checkpoint.js",
+    "app-saya": "node scripts/app-saya.js",
     "reset-db": "node scripts/reset-db.js",
     "slaid": "node scripts/slaid.js",
     "release": "node scripts/release.js"

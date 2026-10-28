@@ -1,0 +1,33 @@
+# Docker Compose: jalankan WEB + API bersama dengan satu command.
+#
+#   docker compose up -d --build   build image & mula (terus berjalan di background)
+#   docker compose ps              status setiap container
+#   docker compose logs api        baca log API
+#   docker compose down            henti & buang container (data dalam volume KEKAL)
+name: inventori
+
+services:
+  web:
+    build:
+      context: .
+      args:
+        COMMIT_SHA: ${COMMIT_SHA:-docker} # commit untuk footer aplikasi (GitHub Actions mengisinya)
+    ports:
+      - "9000:80" # port 9000 komputer → port 80 di dalam container (Nginx)
+    depends_on:
+      api:
+        condition: service_healthy # mula selepas API "healthy"
+        restart: true # API diganti → web dimulakan semula juga
+    restart: unless-stopped # container mati? Docker hidupkan semula
+
+  api:
+    build:
+      context: .
+      dockerfile: api.Dockerfile
+    volumes:
+      - data:/data # db.json disimpan di luar container: kekal selepas deploy baharu
+    restart: unless-stopped
+    # Tiada "ports": API tidak boleh dibuka dari luar, hanya oleh "web"
+
+volumes:
+  data:

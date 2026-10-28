@@ -51,3 +51,9 @@ First version: a morning workshop (09:30–12:15) on deploying the Inventori Ase
   and 05 gained a problem-table row for a skipped checkpoint (01 and 03 already had one).
 - Module 5 now takes `npm run checkpoint 05` first (slide 26 and tutorial 05 Langkah 1, before installing the runner),
   like every other module. Tutorial 05 Bahagian B steps renumbered B1–B4.
+- **Bonus checkpoint 07: deploy your own Vue workshop app.** `npm run checkpoint 07` adds an `app-saya/` folder;
+  participants drag their laptop's `src` onto it (or upload `src.zip`) and run `npm run app-saya`
+  (`scripts/app-saya.js`): backs up `src/`, copies their files, switches the API address to `/api`, runs test +
+  build. Then commit and push: same pipeline, their app on port 9000. Slide 30 (deck now 32 slides), guide
+  `checkpoints/07-app-anda/README.md`. `/app-saya/` is git-ignored; checkpoint 07's `.dockerignore` skips it.
+- Commit history rewritten without co-author lines (template and test repo).
