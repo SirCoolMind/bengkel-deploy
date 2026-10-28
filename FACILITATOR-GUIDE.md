@@ -149,6 +149,10 @@ than 20 sign-ups from one venue IP in five minutes.
 ## The slide deck
 
 Same engine as the Vue workshop (`slaid/deck.js`, `deck.css`): double-click `slaid/index.html`, or `npm run slaid`.
+Online for everyone (GitHub Pages on the template repo, branch `main`, folder `/`):
+https://sircoolmind.github.io/bengkel-deploy/slaid/. The empty `.nojekyll` file at the root makes Pages serve the
+files as they are (without it, GitHub's page builder reads the `${{ github.sha }}` text in the guides as template code).
+Pages updates by itself about a minute after each push to `main`.
 Keys: `→`/`←`, number + `Enter`, `M` menu, `P` presenter view, `Q` QR code, `B` black screen, `F` full screen,
 `D` dark mode, `?` help. Printing (`Ctrl+P`) gives a 16:9 PDF handout.
 

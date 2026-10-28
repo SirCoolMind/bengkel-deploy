@@ -97,7 +97,7 @@ Fail dalam `.github/` hanya berkesan selepas anda *commit* dan *push* (lihat bah
 | `npm test` | *Unit test* (sama seperti GitHub Actions) |
 | `npm run build` | *Build* aplikasi ke folder `dist/` |
 | `npm run reset-db` | Pulihkan data asal (48 aset) untuk mod *development* |
-| `npm run slaid` | Buka slaid bengkel di port 41700 |
+| `npm run slaid` | Buka slaid bengkel di port 41700. Tanpa Codespace: https://sircoolmind.github.io/bengkel-deploy/slaid/ |
 | `bash scripts/pasang-runner.sh TOKEN` | *Install* *self-hosted runner* (Modul 5) |
 | `bash scripts/runner.sh status` | *Runner* berjalan? (juga: `mula`, `henti`, `log`) |
 | `npm run my-app` | Salin aplikasi Bengkel Vue anda (dalam `my-app/`) ke `src/`, kemudian *test* dan *build* (checkpoint 07) |
