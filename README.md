@@ -74,7 +74,7 @@ folder `backup/`. Kod aplikasi (`src/`) tidak disentuh. *Command* itu menunjukka
 | 04 | CI | `.github/workflows/ci.yml` |
 | 05 | CD | `.github/workflows/ci.yml` (+ *job* `deploy`) |
 | 06 | Jawapan cabaran | `.github/dependabot.yml`, `ci.yml` |
-| 07 | Bonus: aplikasi Bengkel Vue anda | `app-saya/` (letak folder `src` anda di sini), `.dockerignore` |
+| 07 | Bonus: aplikasi Bengkel Vue anda | `my-app/` (letak folder `src` anda di sini), `.dockerignore` |
 
 Fail dalam `.github/` hanya berkesan selepas anda *commit* dan *push* (lihat bahagian 3).
 
@@ -100,7 +100,7 @@ Fail dalam `.github/` hanya berkesan selepas anda *commit* dan *push* (lihat bah
 | `npm run slaid` | Buka slaid bengkel di port 41700 |
 | `bash scripts/pasang-runner.sh TOKEN` | *Install* *self-hosted runner* (Modul 5) |
 | `bash scripts/runner.sh status` | *Runner* berjalan? (juga: `mula`, `henti`, `log`) |
-| `npm run app-saya` | Salin aplikasi Bengkel Vue anda (dalam `app-saya/`) ke `src/`, kemudian *test* dan *build* (checkpoint 07) |
+| `npm run my-app` | Salin aplikasi Bengkel Vue anda (dalam `my-app/`) ke `src/`, kemudian *test* dan *build* (checkpoint 07) |
 
 ## 7. Struktur folder
 

@@ -1,8 +1,8 @@
 // Bawa aplikasi Bengkel Vue anda ke dalam projek ini (checkpoint 07).
 //
-//   npm run app-saya
+//   npm run my-app
 //
-// 1. Cari App.vue anda dalam folder app-saya/ (anda seret folder src ke situ). Fail .zip juga boleh.
+// 1. Cari App.vue anda dalam folder my-app/ (anda seret folder src ke situ). Fail .zip juga boleh.
 // 2. Simpan src/ semasa dalam backup/, kemudian salin fail anda ke atas src/.
 //    Fail yang hanya ada dalam bengkel ini (src/utils/, src/build-info.js) kekal, jadi test masih berjalan.
 // 3. Tukar alamat API kepada /api. Di laptop, start.bat memberi alamat json-server (VITE_API_URL);
@@ -14,7 +14,7 @@ import { basename, dirname, join, relative } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const root = fileURLToPath(new URL('..', import.meta.url))
-const appDir = join(root, 'app-saya')
+const appDir = join(root, 'my-app')
 const srcDir = join(root, 'src')
 const rel = (path) => relative(root, path).replaceAll('\\', '/')
 
@@ -26,7 +26,7 @@ function berhenti(...lines) {
 }
 
 if (!existsSync(appDir)) {
-  berhenti('✘ Folder app-saya tiada.', '  Taip dahulu: npm run checkpoint 07')
+  berhenti('✘ Folder my-app tiada.', '  Taip dahulu: npm run checkpoint 07')
 }
 
 // Semua fail dalam satu folder (kecuali node_modules, dist, .git), sebagai laluan penuh
@@ -38,26 +38,26 @@ function walk(dir) {
   })
 }
 
-// 1a. Fail .zip dalam app-saya/: buka dahulu (contoh src.zip → app-saya/src/...)
+// 1a. Fail .zip dalam my-app/: buka dahulu (contoh src.zip → my-app/src/...)
 for (const zip of readdirSync(appDir).filter((name) => name.toLowerCase().endsWith('.zip'))) {
   const dest = join(appDir, basename(zip, '.zip').replace(/\.zip$/i, '') + '-zip')
   if (existsSync(dest)) continue
   const python = ['python3', 'python'].find((cmd) => spawnSync(cmd, ['--version']).status === 0)
   const result = python && spawnSync(python, ['-m', 'zipfile', '-e', join(appDir, zip), dest], { stdio: 'inherit' })
-  if (!result || result.status !== 0) berhenti(`✘ Tidak dapat membuka ${zip}.`, '  Seret folder src terus ke atas folder app-saya.')
+  if (!result || result.status !== 0) berhenti(`✘ Tidak dapat membuka ${zip}.`, '  Seret folder src terus ke atas folder my-app.')
   console.log(`✔ ${zip} dibuka ke ${rel(dest)}/`)
 }
 
-// 1b. Cari App.vue. Jika ada lebih daripada satu, ambil yang paling dekat dengan app-saya/
+// 1b. Cari App.vue. Jika ada lebih daripada satu, ambil yang paling dekat dengan my-app/
 const found = walk(appDir)
   .filter((path) => basename(path) === 'App.vue')
   .sort((a, b) => a.split(/[\\/]/).length - b.split(/[\\/]/).length)
 
 if (!found.length) {
   berhenti(
-    '✘ App.vue tidak dijumpai dalam folder app-saya.',
+    '✘ App.vue tidak dijumpai dalam folder my-app.',
     '  Di laptop, buka folder projek Bengkel Vue anda (vue-crud-workshop).',
-    '  Seret folder src ke atas folder app-saya dalam Explorer Codespace, kemudian ulang: npm run app-saya',
+    '  Seret folder src ke atas folder my-app dalam Explorer Codespace, kemudian ulang: npm run my-app',
   )
 }
 

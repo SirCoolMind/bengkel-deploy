@@ -8,5 +8,5 @@ db.json
 checkpoints
 slaid
 
-# Bonus checkpoint 07: salinan aplikasi Bengkel Vue anda (sudah disalin ke src/ oleh npm run app-saya)
-app-saya
+# Bonus checkpoint 07: salinan aplikasi Bengkel Vue anda (sudah disalin ke src/ oleh npm run my-app)
+my-app

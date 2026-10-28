@@ -12,7 +12,7 @@ Dalam checkpoint ini, anda menukar `src/` dengan kod anda, *push*, dan aplikasi 
 
 Satu perkara perlu ditukar: **alamat API**. Di laptop, `start.bat` memberi aplikasi alamat json-server
 (`http://localhost:41780`). Di *server*, alamat itu tiada: Nginx menghantar `/api` kepada API. *Command*
-`npm run app-saya` menukarnya untuk anda.
+`npm run my-app` menukarnya untuk anda.
 
 ## Sebelum mula
 
@@ -37,14 +37,14 @@ Anda patut nampak:
 ```
 ✔ Fail lama anda disimpan dalam backup/(tarikh-masa)/
 ✔ Siap: fail kini sama seperti checkpoint 07-app-anda
-    BAHARU   app-saya/BACA-SAYA.md
+    BAHARU   my-app/BACA-SAYA.md
     BERUBAH  .dockerignore
     sama     ...   (fail lain)
   Panduan langkah demi langkah: checkpoints/07-app-anda/README.md
 ```
 
-- `app-saya` = folder kosong untuk kod anda. Ia muncul di *Explorer* (sebelah kiri).
-- `.dockerignore` = Docker tidak perlu folder `app-saya` semasa *build*.
+- `my-app` = folder kosong untuk kod anda. Ia muncul di *Explorer* (sebelah kiri).
+- `.dockerignore` = Docker tidak perlu folder `my-app` semasa *build*.
 
 ## Langkah 2: cari folder `src` di laptop anda
 
@@ -63,24 +63,24 @@ Anda patut nampak:
 1. Susun dua tetingkap bersebelahan: klik *browser* Codespace, tekan **Windows + ←**. Kemudian klik File Explorer,
    tekan **Windows + →**.
 2. Dalam File Explorer, tekan dan tahan *mouse* pada folder `src`.
-3. Seret ke *Explorer* Codespace (sebelah kiri *browser*), dan lepaskan **tepat di atas nama folder `app-saya`**
+3. Seret ke *Explorer* Codespace (sebelah kiri *browser*), dan lepaskan **tepat di atas nama folder `my-app`**
    (nama itu bertukar warna bila *mouse* di atasnya).
-4. Tunggu beberapa saat. Klik anak panah di sebelah `app-saya`: anda patut nampak `app-saya` → `src` → `App.vue`.
+4. Tunggu beberapa saat. Klik anak panah di sebelah `my-app`: anda patut nampak `my-app` → `src` → `App.vue`.
 
 > ⚠ Jika keluar soalan *"replace"* atau *"already exists"*: klik **Cancel**. Anda terlepas di tempat lain.
-> Ulang langkah 3, lepaskan tepat di atas `app-saya`.
+> Ulang langkah 3, lepaskan tepat di atas `my-app`.
 
 ### Cara B: fail zip (jika Cara A tidak berfungsi)
 
 1. Dalam File Explorer, klik kanan folder `src` → **Compress to ZIP file** (Windows 10: **Send to** →
    **Compressed (zipped) folder**). Fail `src.zip` muncul.
-2. Dalam *Explorer* Codespace, klik kanan folder `app-saya` → **Upload...**.
-3. Pilih `src.zip`, klik **Open**. `src.zip` muncul di bawah `app-saya`. `npm run app-saya` akan membukanya.
+2. Dalam *Explorer* Codespace, klik kanan folder `my-app` → **Upload...**.
+3. Pilih `src.zip`, klik **Open**. `src.zip` muncul di bawah `my-app`. `npm run my-app` akan membukanya.
 
 ## Langkah 4: salin kod anda ke `src/`
 
 ```bash
-npm run app-saya
+npm run my-app
 ```
 
 *Command* ini (1) menyimpan `src/` bengkel dalam `backup/`, (2) menyalin fail anda ke atas `src/`, (3) menukar
@@ -88,7 +88,7 @@ alamat API kepada `/api`, dan (4) menjalankan *test* dan *build*, sama seperti C
 (lebih kurang 30 saat):
 
 ```
-✔ Aplikasi anda dijumpai: app-saya/src/ (9 fail)
+✔ Aplikasi anda dijumpai: my-app/src/ (9 fail)
 ✔ src/ lama disimpan dalam backup/(tarikh-masa)/src/
 ✔ Fail anda disalin ke src/:
     BERUBAH  src/App.vue
@@ -124,7 +124,7 @@ git commit -m "Aplikasi saya"
 git push
 ```
 
-Folder `app-saya` tidak dihantar ke GitHub (ia dalam `.gitignore`). Kod anda sudah ada dalam `src/`.
+Folder `my-app` tidak dihantar ke GitHub (ia dalam `.gitignore`). Kod anda sudah ada dalam `src/`.
 
 ## Langkah 7: lihat *pipeline* di GitHub
 
@@ -148,7 +148,7 @@ Folder `app-saya` tidak dihantar ke GitHub (ia dalam `.gitignore`). Kod anda sud
 
 ## Semak kerja anda
 
-- [ ] `npm run app-saya` menunjukkan `✔ Aplikasi anda lulus test dan build.`
+- [ ] `npm run my-app` menunjukkan `✔ Aplikasi anda lulus test dan build.`
 - [ ] Tab **Actions**: **Aplikasi saya** dengan ✅ **Test & build** dan ✅ **Deploy ke server**.
 - [ ] Port 9000 menunjukkan aplikasi **anda**, dan `/version.json` menunjukkan *commit* terakhir anda.
 
@@ -167,13 +167,13 @@ Selepas *pipeline* ✅, port 9000 kembali kepada aplikasi bengkel.
 
 | Apa yang anda nampak | Apa yang perlu dibuat |
 |---|---|
-| `✘ Folder app-saya tiada.` | Langkah 1 belum dibuat. Taip `npm run checkpoint 07` |
-| `✘ App.vue tidak dijumpai dalam folder app-saya.` | Folder `src` belum sampai. Ulang Langkah 3. Semak di *Explorer*: `app-saya` → `src` → `App.vue` |
-| Soalan *"replace"* / *"already exists"* semasa menyeret | Klik **Cancel**. Lepaskan tepat di atas nama `app-saya` (Langkah 3) |
+| `✘ Folder my-app tiada.` | Langkah 1 belum dibuat. Taip `npm run checkpoint 07` |
+| `✘ App.vue tidak dijumpai dalam folder my-app.` | Folder `src` belum sampai. Ulang Langkah 3. Semak di *Explorer*: `my-app` → `src` → `App.vue` |
+| Soalan *"replace"* / *"already exists"* semasa menyeret | Klik **Cancel**. Lepaskan tepat di atas nama `my-app` (Langkah 3) |
 | Seret tidak berbuat apa-apa | Gunakan Cara B (fail zip) dalam Langkah 3 |
 | `✘ Test gagal.` | `src/services/api.js` anda berbeza daripada versi akhir Bengkel Vue. Kembali kepada aplikasi bengkel: `git checkout -- src`, kemudian minta bantuan fasilitator |
 | `✘ Build gagal.` dengan `failed to resolve import "..."` | Aplikasi anda memerlukan *package* lain. Taip `npm install <nama-package>` (nama dalam tanda petik itu), kemudian `npm run build` |
-| Port 9000: tiada data, atau mesej *"Failed to fetch"* | Buka `src/services/api.js`. Baris `API_URL` mesti `(import.meta.env.VITE_API_URL \|\| '/api')`. Jika tidak, ulang `npm run app-saya` |
+| Port 9000: tiada data, atau mesej *"Failed to fetch"* | Buka `src/services/api.js`. Baris `API_URL` mesti `(import.meta.env.VITE_API_URL \|\| '/api')`. Jika tidak, ulang `npm run my-app` |
 | Port 9000 masih aplikasi lama | Tekan **Ctrl + Shift + R**. Semak tab **Actions**: kedua-dua *job* mesti ✅ |
 | **Deploy ke server**: *"Waiting for a runner"* | *Runner* tidak berjalan. Taip `bash scripts/runner.sh mula` |
 | `git push` ditolak: *"refusing to allow ... workflow"* | Anda datang dari checkpoint 06, jadi `ci.yml` berubah. Ikut checkpoint 04, bahagian *Jika ada masalah* |
@@ -189,6 +189,6 @@ Selepas *pipeline* ✅, port 9000 kembali kepada aplikasi bengkel.
 
 | Fail | Perubahan |
 |---|---|
-| `.dockerignore` | Tambah `app-saya`: Docker tidak menghantar folder itu semasa *build* |
-| `app-saya/BACA-SAYA.md` | BAHARU: folder untuk kod anda, dengan arahan ringkas |
-| `src/` | Kod Bengkel Vue anda (melalui `npm run app-saya`, bukan checkpoint) |
+| `.dockerignore` | Tambah `my-app`: Docker tidak menghantar folder itu semasa *build* |
+| `my-app/BACA-SAYA.md` | BAHARU: folder untuk kod anda, dengan arahan ringkas |
+| `src/` | Kod Bengkel Vue anda (melalui `npm run my-app`, bukan checkpoint) |

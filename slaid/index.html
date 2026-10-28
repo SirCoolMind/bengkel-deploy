@@ -766,19 +766,19 @@
      ===================================================================== -->
 
 <section class="slide" data-title="Bonus: aplikasi anda sendiri" data-cp="07" data-minit="15"
-  data-giliran="<code>npm run checkpoint 07</code> → seret <code>src</code> ke <code>app-saya</code> → <code>npm run app-saya</code> → <em>push</em>">
+  data-giliran="<code>npm run checkpoint 07</code> → seret <code>src</code> ke <code>my-app</code> → <code>npm run my-app</code> → <em>push</em>">
   <h2>Bonus: <em>deploy</em> aplikasi Bengkel Vue <em>anda</em></h2>
   <div class="cols">
     <ol class="small stack">
-      <li><code>npm run checkpoint 07</code>: folder <code>app-saya</code> muncul di <em>Explorer</em>.</li>
-      <li>Di laptop, buka projek Bengkel Vue anda (<code>vue-crud-workshop</code>). Seret folder <code>src</code> ke atas folder <code>app-saya</code>.</li>
-      <li><code>npm run app-saya</code>: salin ke <code>src/</code>, tukar alamat API kepada <code>/api</code>, jalankan <em>test</em> &amp; <em>build</em>.</li>
+      <li><code>npm run checkpoint 07</code>: folder <code>my-app</code> muncul di <em>Explorer</em>.</li>
+      <li>Di laptop, buka projek Bengkel Vue anda (<code>vue-crud-workshop</code>). Seret folder <code>src</code> ke atas folder <code>my-app</code>.</li>
+      <li><code>npm run my-app</code>: salin ke <code>src/</code>, tukar alamat API kepada <code>/api</code>, jalankan <em>test</em> &amp; <em>build</em>.</li>
       <li><em>Commit</em> &amp; <em>push</em> → tab <strong>Actions</strong> ✅ ✅ → port <code>9000</code>: aplikasi <strong>anda</strong>.</li>
     </ol>
     <div class="stack">
       <textarea class="code" data-lang="bash" data-title="Terminal">
         npm run checkpoint 07
-        npm run app-saya
+        npm run my-app
         git add -A
         git commit -m "Aplikasi saya"
         git push
@@ -790,9 +790,9 @@
   <aside class="notes">
     <ul>
       <li>Bonus for fast finishers, or homework. Full guide: <code>checkpoints/07-app-anda/README.md</code>.</li>
-      <li>The one real difference between laptop and server is the API address. In the Vue workshop, <code>start.bat</code> set <code>VITE_API_URL</code> to json-server on port 41780. <code>npm run app-saya</code> makes it fall back to <code>/api</code>, which Vite proxies in development and Nginx serves in production.</li>
+      <li>The one real difference between laptop and server is the API address. In the Vue workshop, <code>start.bat</code> set <code>VITE_API_URL</code> to json-server on port 41780. <code>npm run my-app</code> makes it fall back to <code>/api</code>, which Vite proxies in development and Nginx serves in production.</li>
       <li>It keeps <code>src/utils/</code> and <code>src/build-info.js</code>, so the 13 tests still run. A red CI here is a good teaching moment: production stays on the last good version.</li>
-      <li>If dragging the folder doesn't work in their browser: zip <code>src</code>, right-click <code>app-saya</code> → <strong>Upload...</strong>; the script unzips it.</li>
+      <li>If dragging the folder doesn't work in their browser: zip <code>src</code>, right-click <code>my-app</code> → <strong>Upload...</strong>; the script unzips it.</li>
     </ul>
   </aside>
 </section>
