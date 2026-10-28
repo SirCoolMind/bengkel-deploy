@@ -49,3 +49,5 @@ First version: a morning workshop (09:30–12:15) on deploying the Inventori Ase
 - `npm run checkpoint NN` is now the first command on each module's slide (terminal box and band), not only at the
   far right of the band: following slide 9 without it gave `File ecosystem.config.cjs not found`. Tutorials 02, 04
   and 05 gained a problem-table row for a skipped checkpoint (01 and 03 already had one).
+- Module 5 now takes `npm run checkpoint 05` first (slide 26 and tutorial 05 Langkah 1, before installing the runner),
+  like every other module. Tutorial 05 Bahagian B steps renumbered B1–B4.

@@ -26,6 +26,32 @@ git push ──► GitHub: job "Test & build" ✅ ──► job "Deploy ke serve
 
 ---
 
+## Langkah 1: ambil fail checkpoint
+
+Klik dalam *terminal* (bawah skrin), taip, tekan **Enter**:
+
+```bash
+npm run checkpoint 05
+```
+
+Anda patut nampak:
+
+```
+✔ Fail lama anda disimpan dalam backup/(tarikh-masa)/
+✔ Siap: fail kini sama seperti checkpoint 05-cd
+    BERUBAH  .github/workflows/ci.yml
+    sama     ...   (fail lain)
+  Panduan langkah demi langkah: checkpoints/05-cd/README.md
+
+  ⚠ GitHub hanya nampak fail dalam .github/ selepas anda commit dan push.
+    Ikut langkah commit dan push dalam panduan di atas.
+```
+
+`BERUBAH` = fail `ci.yml` kini ada *job* `deploy` baharu. Jangan *push* lagi: kita *install* *runner* dahulu
+(Bahagian A), kemudian baca dan *push* fail ini dalam Bahagian B.
+
+---
+
 ## Bahagian A: *install* *runner* dalam Codespace (~7 minit)
 
 ### Langkah A1: buka halaman **Runners** di GitHub
@@ -88,26 +114,7 @@ Anda patut nampak `codespace-...` dengan bulatan hijau dan status **Idle** (menu
 
 ## Bahagian B: tambah *job* *deploy* (~10 minit)
 
-### Langkah B1: ambil fail checkpoint
-
-```bash
-npm run checkpoint 05
-```
-
-```
-✔ Fail lama anda disimpan dalam backup/(tarikh-masa)/
-✔ Siap: fail kini sama seperti checkpoint 05-cd
-    BERUBAH  .github/workflows/ci.yml
-    sama     ...   (fail lain)
-  Panduan langkah demi langkah: checkpoints/05-cd/README.md
-
-  ⚠ GitHub hanya nampak fail dalam .github/ selepas anda commit dan push.
-    Ikut langkah commit dan push dalam panduan di atas.
-```
-
-Kita buat *commit* dan *push* dalam Langkah B3.
-
-### Langkah B2: baca *job* baharu dalam `ci.yml`
+### Langkah B1: baca *job* baharu dalam `ci.yml`
 
 Buka `.github/workflows/ci.yml`. Di bawah *job* `test`, ada *job* baharu `deploy`:
 
@@ -119,7 +126,7 @@ Buka `.github/workflows/ci.yml`. Di bawah *job* `test`, ada *job* baharu `deploy
 | `COMMIT_SHA: ${{ github.sha }}` | Nombor *commit* untuk *footer* aplikasi |
 | `curl -fsS http://localhost:9000/version.json` | Semak aplikasi benar-benar menjawab (*smoke test*). Tiada jawapan = ❌ |
 
-### Langkah B3: *commit* dan *push*
+### Langkah B2: *commit* dan *push*
 
 ```bash
 git add -A
@@ -127,7 +134,7 @@ git commit -m "Tambah CD"
 git push
 ```
 
-### Langkah B4: lihat *deploy* di GitHub
+### Langkah B3: lihat *deploy* di GitHub
 
 1. Tab **Actions** → klik **Tambah CD**.
 2. Anda nampak dua kotak bersambung: **Test & build** → **Deploy ke server**.
@@ -139,7 +146,7 @@ git push
 > *Deploy* ini menggantikan *container* yang anda mulakan dalam Modul 3 (namanya sama: `inventori`).
 > Data dalam *volume* kekal.
 
-### Langkah B5: semak aplikasi
+### Langkah B4: semak aplikasi
 
 Di tab aplikasi port 9000, tekan **F5**. *Footer* kini menunjukkan nombor *commit* yang sama, bukan lagi `docker`.
 
@@ -226,12 +233,12 @@ npm run semak
 
 | Apa yang anda nampak | Apa yang perlu dibuat |
 |---|---|
-| Tab **Actions** hanya ada **Test & build**, tiada **Deploy ke server** | `npm run checkpoint 05` (Bahagian B) belum dibuat. Taip `npm run checkpoint 05`, kemudian *commit* dan *push* semula |
+| Tab **Actions** hanya ada **Test & build**, tiada **Deploy ke server** | Langkah 1 belum dibuat. Taip `npm run checkpoint 05`, kemudian *commit* dan *push* semula |
 | **Deploy ke server**: *"Waiting for a runner to pick up this job"* | *Runner* tidak berjalan. Taip `bash scripts/runner.sh status`, kemudian `bash scripts/runner.sh mula`. Codespace tertutup? Buka semula |
 | **Deploy ke server** ❌ pada *step* **Build & jalankan container** | Klik *step* itu, baca baris merah pertama. Cuba sendiri: `docker compose up -d --build` |
 | **Deploy ke server** ❌ pada *step* **Semak aplikasi berjalan** | Aplikasi tidak menjawab di port 9000. Taip `docker compose ps` dan `docker compose logs api` |
 | Port 9000 masih tunjuk tajuk lama | Tekan **Ctrl + Shift + R** (*refresh* penuh). Bandingkan nombor *commit* di *footer* dengan tab **Actions** |
-| `git push` ditolak: *"refusing to allow ... workflow"* (Langkah B3) | Sama seperti checkpoint 04, bahagian *Jika ada masalah*, tetapi fail sudah ada di GitHub: buka `.github/workflows/ci.yml` di github.com → ikon pensel ✏ (**Edit**) → **Ctrl + A**, kemudian *paste* kandungan baharu → **Commit changes...** → **Commit changes**. Kemudian dalam *terminal*: `git pull --rebase`, kemudian `git push` |
+| `git push` ditolak: *"refusing to allow ... workflow"* (Langkah B2) | Sama seperti checkpoint 04, bahagian *Jika ada masalah*, tetapi fail sudah ada di GitHub: buka `.github/workflows/ci.yml` di github.com → ikon pensel ✏ (**Edit**) → **Ctrl + A**, kemudian *paste* kandungan baharu → **Commit changes...** → **Commit changes**. Kemudian dalam *terminal*: `git pull --rebase`, kemudian `git push` |
 | `git revert` tunjuk *"conflict"* | Taip `git revert --abort`, kemudian minta bantuan fasilitator |
 
 ## Apa yang anda belajar

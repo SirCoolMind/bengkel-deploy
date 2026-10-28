@@ -653,7 +653,7 @@
 </section>
 
 <section class="slide" data-title="Self-hosted runner" data-cp="05" data-minit="7"
-  data-giliran="salin token, kemudian <code>bash scripts/pasang-runner.sh TOKEN</code>">
+  data-giliran="<code>npm run checkpoint 05</code> → salin token → <code>bash scripts/pasang-runner.sh TOKEN</code>">
   <h2>Runner di <em>server</em> kita sendiri</h2>
   <div class="flow" style="margin-bottom: 18px">
     <div class="node"><strong>GitHub</strong>ada kerja <em>deploy</em></div>
@@ -670,6 +670,7 @@
     </ol>
     <div class="stack">
       <textarea class="code" data-lang="bash" data-title="Terminal">
+        npm run checkpoint 05
         bash scripts/pasang-runner.sh XXXXX
       </textarea>
       <div class="callout tip small">Kembali ke halaman <strong>Runners</strong>: status <strong>Idle</strong> 🟢</div>
@@ -686,7 +687,7 @@
 </section>
 
 <section class="slide" data-title="Job deploy" data-cp="05" data-minit="10"
-  data-giliran="<code>npm run checkpoint 05</code>, ubah tajuk, <em>commit</em> &amp; <em>push</em>, kemudian port <code>9000</code>">
+  data-giliran="ubah tajuk, <em>commit</em> &amp; <em>push</em>, kemudian port <code>9000</code>">
   <h2>Job kedua: <em>deploy</em> selepas <em>test</em> lulus</h2>
   <div class="cols code-wide">
     <textarea class="code sm" data-lang="yaml" data-title=".github/workflows/ci.yml · sambungan (diringkaskan)" data-hl="3,4,8">
@@ -706,7 +707,6 @@
     <div class="stack">
       <div class="callout"><strong><em>Command</em> yang sama</strong> seperti Modul 3. Bezanya: GitHub yang menaip.</div>
       <ol class="small">
-        <li><code>npm run checkpoint 05</code> (tambah <em>job</em> <em>deploy</em> ke <code>ci.yml</code>)</li>
         <li>Ubah tajuk dalam <code>src/App.vue</code> (<code>v-app-bar-title</code>)</li>
         <li><code>git add -A &amp;&amp; git commit -m "Tajuk baharu" &amp;&amp; git push</code></li>
         <li>Tab <strong>Actions</strong>: ✅ Test &amp; build → ✅ Deploy ke server</li>
