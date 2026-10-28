@@ -1,4 +1,4 @@
-# 03 · Docker: bungkus semuanya, jalan di mana-mana
+# 03 · Docker: semua dalam satu kotak, jalan di mana-mana
 
 **Modul 3** · lebih kurang 25 minit · port `9000`
 
@@ -7,14 +7,14 @@
 Dalam Modul 1 dan 2, *server* perlu Node.js, PM2 dan Nginx yang betul, dan anda menaip banyak *command*.
 Di *server* lain, versi mungkin berbeza: *"Di komputer saya boleh!"*
 
-**Docker** membungkus aplikasi **bersama** semua yang ia perlukan. Bungkusan yang sama berjalan dengan cara
-yang sama di mana-mana *server*.
+**Docker** memasukkan aplikasi **bersama** semua yang ia perlukan ke dalam satu kotak. Kotak yang sama berjalan
+dengan cara yang sama di mana-mana *server*.
 
 ## Tiga perkataan
 
 | Perkataan | Maksud | Contoh dalam bengkel |
 |---|---|---|
-| ***Image*** | Bungkusan siap: aplikasi + *software* + konfigurasi. Resipinya ialah `Dockerfile`. | `inventori-web`, `inventori-api` |
+| ***Image*** | Kotak yang siap: aplikasi + *software* + konfigurasi. Resipinya ialah `Dockerfile`. | `inventori-web`, `inventori-api` |
 | ***Container*** | *Image* yang sedang berjalan | `inventori-web-1`, `inventori-api-1` |
 | **Compose** | Senarai beberapa *container* yang dimulakan bersama. Senarainya ialah `compose.yaml`. | web + api |
 
@@ -188,7 +188,7 @@ npm run semak
 ## Apa yang anda belajar
 
 - Kini *deploy* = **satu *command***: `docker compose up -d --build`. Tiada lagi enam langkah.
-- *Image* = bungkusan, *container* = bungkusan yang berjalan, Compose = beberapa *container* bersama.
+- *Image* = kotak yang siap, *container* = kotak itu sedang berjalan, Compose = beberapa *container* bersama.
 - *Volume* menyimpan data di luar *container*, jadi *container* boleh diganti bila-bila masa.
 - Seterusnya: biar GitHub yang menaip *command* ini untuk kita.
 

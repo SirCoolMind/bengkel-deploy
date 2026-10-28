@@ -158,7 +158,7 @@ menjalankan `npm run checkpoint`.
 | **Port** | "Pintu" bernombor di komputer. Setiap program mendengar di port sendiri |
 | ***Process manager*** | Program yang menjaga program lain (PM2) |
 | ***Reverse proxy*** | Pintu masuk yang menghantar permintaan ke program lain (Nginx) |
-| ***Image*** / ***container*** | Bungkusan aplikasi / bungkusan itu sedang berjalan (Docker) |
+| ***Image*** / ***container*** | Kotak aplikasi yang siap / kotak itu sedang berjalan (Docker) |
 | ***Volume*** | Tempat simpan data di luar *container* |
 | **CI** / **CD** | *Test* automatik setiap *push* / *deploy* automatik selepas *test* lulus |
 | ***Workflow*** / ***job*** / ***runner*** | Fail arahan GitHub Actions / satu kumpulan langkah / mesin yang menjalankannya |

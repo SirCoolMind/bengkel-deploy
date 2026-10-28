@@ -16,7 +16,7 @@ Each module **automates the one before it**. That's the logic participants shoul
 ```
  1. PM2      "Pastikan API sentiasa hidup"           pm2 start            → API berjalan, hidup semula bila mati
  2. Nginx    "Hidangkan aplikasi kepada pengguna"    sudo nginx           → aplikasi di port 8080
- 3. Docker   "Bungkus semuanya, jalan di mana-mana"  docker compose up    → aplikasi di port 9000
+ 3. Docker   "Semua dalam satu kotak, jalan di mana-mana"  docker compose up    → aplikasi di port 9000
  4. CI       "GitHub uji setiap perubahan"           git push             → ✅ atau ❌
  5. CD       "GitHub deploy bila ujian lulus"        git push             → aplikasi baharu di port 9000
 ```
@@ -113,7 +113,7 @@ then shorten the ❌ → ✅ exercise in CI. Never cut Module 5: it's the payoff
 - **Demo moment:** `pm2 stop` → refresh → **502 Bad Gateway** → "Nginx is fine, the API behind it isn't" → `pm2 start`.
 - **Wrap-up line:** "Every new version means: pull, install, test, build, copy, restart. Six manual steps. Let's automate that."
 
-### 3 · Docker: "Bungkus semuanya, jalan di mana-mana" (25 min)
+### 3 · Docker: "Semua dalam satu kotak, jalan di mana-mana" (25 min)
 - **Problem:** "It works on my machine." The server needs exactly the right Node, Nginx and config.
 - **Ideas:** image = a packed box (recipe: `Dockerfile`) · container = the box running · Compose = several boxes started together.
 - **Hands-on (checkpoint 03):**
