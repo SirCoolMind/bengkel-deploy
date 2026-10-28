@@ -1,7 +1,7 @@
 {
   "name": "inventori-aset-ict",
   "private": true,
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Bengkel Deployment dan Penyelenggaraan: PM2, Nginx, Docker dan CI/CD (GitHub Actions)",
   "type": "module",
   "engines": {

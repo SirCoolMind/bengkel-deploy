@@ -2,7 +2,7 @@
 
 PM2 · Nginx · Docker · **CI/CD dengan GitHub Actions**
 
-Projek bengkel: aplikasi **Inventori Aset ICT** (sama seperti Bengkel Vue CRUD). Pagi ini kita membawanya
+Projek bengkel: aplikasi **Inventori Aset ICT** (sama seperti Bengkel Vue CRUD). Petang ini kita membawanya
 dari laptop ke *server*, kemudian membiarkan GitHub men-*test* dan men-*deploy* setiap perubahan untuk kita.
 
 > **Mula di sini:** `checkpoints/00-mula/README.md`. Setiap langkah bengkel ada panduan sendiri dalam
@@ -21,7 +21,7 @@ dari laptop ke *server*, kemudian membiarkan GitHub men-*test* dan men-*deploy* 
 *Server* anda ialah **GitHub Codespace**: komputer Linux di *cloud*, dibuka dalam *browser*, dengan
 Node.js, Docker, Nginx dan PM2 sudah tersedia.
 
-## 2. Lima modul pagi ini
+## 2. Lima modul petang ini
 
 Setiap modul mengautomasikan modul sebelumnya.
 
@@ -34,7 +34,7 @@ Setiap modul mengautomasikan modul sebelumnya.
 | 5 | **CD** | *Deploy* manual, lambat, mudah silap | `git push` | Versi baharu di port 9000 | `checkpoints/05-cd` |
 
 *Footer* aplikasi (bawah sekali) menunjukkan versi yang sedang berjalan, contohnya
-`Versi 0.0.1 · commit a1b2c3d · dibina 27 Okt 2026, 11:52 · Production`.
+`Versi 1.0.0 · commit a1b2c3d · dibina 27 Okt 2026, 16:52 · Production`.
 
 ## 3. Panduan asas Codespace
 

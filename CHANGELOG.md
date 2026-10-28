@@ -3,6 +3,33 @@
 Each version is saved as a zip by `npm run release` in `../vue-deploy-workshop-releases/`.
 To make a new version: update `"version"` in `package.json`, add an entry below, then run `npm run release`.
 
+## v1.0.0 (2026-10-28)
+
+The version for the workshop on 28 Oktober 2026, 2:30 petang – 5:15 petang.
+
+- **Afternoon session:** the whole schedule moves by 5 hours: registration 14:30, PM2 15:00, Nginx 15:08,
+  Docker 15:20, break 15:45–16:00, CI 16:00, CD 16:35, closing 17:05, end 17:15. Title slide: "2:30 petang hingga
+  5:15 petang". "pagi ini" → "petang ini" in the slides and guides.
+- **Published:** template repo `github.com/SirCoolMind/bengkel-deploy`, short link
+  `url.unijaya.com/bengkel-deploy-template`. Slide 3 and tutorial 00 give that link instead of a QR code (a phone scan
+  opens the link on the phone, not the laptop). Title slide date: 28 Oktober 2026.
+- GitHub's green **Code** menu no longer has a **Codespaces** tab. Slide 3, tutorial 00 (Langkah 4) and the facilitator
+  guide now open the Codespace from `github.com/codespaces/new` → own repo → **Create codespace**.
+- `npm run checkpoint NN` is now the first command on each module's slide (terminal box and band), not only at the
+  far right of the band: following slide 9 without it gave `File ecosystem.config.cjs not found`. Tutorials 02, 04
+  and 05 gained a problem-table row for a skipped checkpoint (01 and 03 already had one).
+- Module 5 now takes `npm run checkpoint 05` first (slide 26 and tutorial 05 Langkah 1, before installing the runner),
+  like every other module. Tutorial 05 Bahagian B steps renumbered B1–B4.
+- **Bonus checkpoint 07: deploy your own Vue workshop app.** `npm run checkpoint 07` adds a `my-app/` folder;
+  participants drag their laptop's `src` onto it (or upload `src.zip`) and run `npm run my-app`
+  (`scripts/my-app.js`): backs up `src/`, copies their files, switches the API address to `/api`, runs test +
+  build. Then commit and push: same pipeline, their app on port 9000. Slide 30 (deck now 32 slides), guide
+  `checkpoints/07-app-anda/README.md`. `/my-app/` is git-ignored; checkpoint 07's `.dockerignore` skips it.
+- Docker slogan: "Semua dalam satu kotak, jalan di mana-mana" (was "Bungkus semuanya"); *image* = kotak yang siap,
+  *container* = kotak itu sedang berjalan.
+- App footer and examples show **Versi 1.0.0**.
+- Commit history rewritten without co-author lines (template and test repo).
+
 ## v0.0.1 (2026-10-26)
 
 First version: a morning workshop (09:30–12:15) on deploying the Inventori Aset ICT app from the Vue CRUD workshop.
@@ -41,19 +68,3 @@ First version: a morning workshop (09:30–12:15) on deploying the Inventori Ase
   is pasted wrongly (whole line, too short, placeholder).
 - Codespace: "Open in Browser" pop-ups for ports 41730/8080/9000, guides open as formatted pages, one folder per row
   in the Explorer. App footer chip says **Production** / **Development**. Dockerfile build stage renamed `build`.
-- **Published (28 Oct):** template repo `github.com/SirCoolMind/bengkel-deploy`, short link
-  `url.unijaya.com/bengkel-deploy-template`. Slide 3 and tutorial 00 give that link instead of a QR code (a phone scan
-  opens the link on the phone, not the laptop). Title slide date: 28 Oktober 2026.
-- GitHub's green **Code** menu no longer has a **Codespaces** tab. Slide 3, tutorial 00 (Langkah 4) and the facilitator
-  guide now open the Codespace from `github.com/codespaces/new` → own repo → **Create codespace**.
-- `npm run checkpoint NN` is now the first command on each module's slide (terminal box and band), not only at the
-  far right of the band: following slide 9 without it gave `File ecosystem.config.cjs not found`. Tutorials 02, 04
-  and 05 gained a problem-table row for a skipped checkpoint (01 and 03 already had one).
-- Module 5 now takes `npm run checkpoint 05` first (slide 26 and tutorial 05 Langkah 1, before installing the runner),
-  like every other module. Tutorial 05 Bahagian B steps renumbered B1–B4.
-- **Bonus checkpoint 07: deploy your own Vue workshop app.** `npm run checkpoint 07` adds an `my-app/` folder;
-  participants drag their laptop's `src` onto it (or upload `src.zip`) and run `npm run my-app`
-  (`scripts/my-app.js`): backs up `src/`, copies their files, switches the API address to `/api`, runs test +
-  build. Then commit and push: same pipeline, their app on port 9000. Slide 30 (deck now 32 slides), guide
-  `checkpoints/07-app-anda/README.md`. `/my-app/` is git-ignored; checkpoint 07's `.dockerignore` skips it.
-- Commit history rewritten without co-author lines (template and test repo).

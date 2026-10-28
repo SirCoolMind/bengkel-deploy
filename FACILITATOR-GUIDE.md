@@ -1,6 +1,6 @@
 # Facilitator Guide
 
-**Deployment dan Penyelenggaraan Aplikasi Web: PM2, Nginx, Docker, CI/CD**: morning workshop, 09:30–12:15.
+**Deployment dan Penyelenggaraan Aplikasi Web: PM2, Nginx, Docker, CI/CD**: afternoon workshop, 14:30–17:15.
 
 This file is for you, not the participants (everything participant-facing is in BM).
 
@@ -12,8 +12,8 @@ This file is for you, not the participants (everything participant-facing is in 
 > into one command → CI tests every push → CD runs that one command on the server after the tests pass.
 
 Participants deploy the **Inventori Aset ICT** app from the Vue CRUD workshop (checkpoint 14), so there's no new app
-code. A footer in the app shows what's running (`Versi 0.0.1 · commit a1b2c3d · dibina … · Production`), so every
-deploy is visible. The payoff at ~12:00: change the title, `git push`, refresh, new title and commit.
+code. A footer in the app shows what's running (`Versi 1.0.0 · commit a1b2c3d · dibina … · Production`), so every
+deploy is visible. The payoff at ~17:00: change the title, `git push`, refresh, new title and commit.
 
 ---
 
@@ -67,14 +67,14 @@ fork-PR approval setting to turn on first.
 
 | Time | Session | Checkpoint | Slides | Result |
 |---|---|---|---|---|
-| 09:30–10:00 | **Pendaftaran & pembukaan** | 00 | 1–7 | `npm run semak` green |
-| 10:00–10:08 | **1 · PM2** | 01 | 8–10 | API survives `kill -9` |
-| 10:08–10:20 | **2 · Nginx** | 02 | 11–14 | App on 8080, 502 demo |
-| 10:20–10:45 | **3 · Docker** | 03 | 15–19 | App on 9000, data survives `down`/`up` |
-| 10:45–11:00 | Rehat | | 20 | |
-| 11:00–11:35 | **4 · CI** | 04 | 21–24 | ✅, then ❌ → ✅ |
-| 11:35–12:05 | **5 · CD & penyelenggaraan** | 05 | 25–29 | `git push` → live on 9000 |
-| 12:05–12:15 | **Penutup** | | 30–31 | |
+| 14:30–15:00 | **Pendaftaran & pembukaan** | 00 | 1–7 | `npm run semak` green |
+| 15:00–15:08 | **1 · PM2** | 01 | 8–10 | API survives `kill -9` |
+| 15:08–15:20 | **2 · Nginx** | 02 | 11–14 | App on 8080, 502 demo |
+| 15:20–15:45 | **3 · Docker** | 03 | 15–19 | App on 9000, data survives `down`/`up` |
+| 15:45–16:00 | Rehat | | 20 | |
+| 16:00–16:35 | **4 · CI** | 04 | 21–24 | ✅, then ❌ → ✅ |
+| 16:35–17:05 | **5 · CD & penyelenggaraan** | 05 | 25–29 | `git push` → live on 9000 |
+| 17:05–17:15 | **Penutup** | | 30–31 | |
 
 Type the slide number + `Enter` to jump.
 
@@ -92,7 +92,7 @@ break), then shorten the ❌ → ✅ exercise. **Never cut Module 5.**
 | 25–30 | `npm run semak`: three ✔ | Slide 7. Pair anyone stuck with a neighbour |
 
 The idle timeout must be set **before** the Codespace is created: GitHub applies the default only to Codespaces
-created after the change. With the 15-minute break, the default 30 minutes is also enough for this morning.
+created after the change. With the 15-minute break, the default 30 minutes is also enough for this afternoon.
 
 ---
 
@@ -106,7 +106,7 @@ created after the change. With the 15-minute break, the default 30 minutes is al
    ```bash
    git init -b main
    git add -A
-   git commit -m "Bengkel deploy v0.0.1"
+   git commit -m "Bengkel deploy v1.0.0"
    gh repo create <organisasi>/bengkel-deploy --public --source . --push
    gh repo edit <organisasi>/bengkel-deploy --template
    ```
@@ -117,7 +117,7 @@ created after the change. With the 15-minute break, the default 30 minutes is al
    so if the repo moves, change the redirect, not the material.
 
 ### 1–2 weeks before: full dry run on a fresh GitHub account
-Do the whole morning as a participant would, on a **new** account, from a Windows office laptop if you can.
+Do the whole afternoon as a participant would, on a **new** account, from a Windows office laptop if you can.
 Almost everything has been run in a real Codespace (see "How this version was verified" below). Two things need
 a person signed in to GitHub in a browser, so check them in your dry run:
 

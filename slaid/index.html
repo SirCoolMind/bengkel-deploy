@@ -25,15 +25,15 @@
 -->
 <script type="application/json" id="jadual">
 [
-  { "id": "daftar", "masa": "09:30", "tajuk": "Pendaftaran & pembukaan",        "warna": "vue" },
-  { "id": "m1",     "masa": "10:00", "modul": "Modul 1", "tajuk": "PM2",               "warna": "teal" },
-  { "id": "m2",     "masa": "10:08", "modul": "Modul 2", "tajuk": "Nginx",             "warna": "teal" },
-  { "id": "m3",     "masa": "10:20", "modul": "Modul 3", "tajuk": "Docker",            "warna": "blue" },
-  { "id": "rehat",  "masa": "10:45", "tajuk": "Rehat",                           "rehat": true },
-  { "id": "m4",     "masa": "11:00", "modul": "Modul 4", "tajuk": "CI: GitHub Actions", "warna": "amber" },
-  { "id": "m5",     "masa": "11:35", "modul": "Modul 5", "tajuk": "CD & penyelenggaraan", "warna": "indigo" },
-  { "id": "tutup",  "masa": "12:05", "tajuk": "Penutup & soal jawab",            "warna": "vue" },
-  { "id": "tamat",  "masa": "12:15", "tajuk": "Tamat",                           "tamat": true }
+  { "id": "daftar", "masa": "14:30", "tajuk": "Pendaftaran & pembukaan",        "warna": "vue" },
+  { "id": "m1",     "masa": "15:00", "modul": "Modul 1", "tajuk": "PM2",               "warna": "teal" },
+  { "id": "m2",     "masa": "15:08", "modul": "Modul 2", "tajuk": "Nginx",             "warna": "teal" },
+  { "id": "m3",     "masa": "15:20", "modul": "Modul 3", "tajuk": "Docker",            "warna": "blue" },
+  { "id": "rehat",  "masa": "15:45", "tajuk": "Rehat",                           "rehat": true },
+  { "id": "m4",     "masa": "16:00", "modul": "Modul 4", "tajuk": "CI: GitHub Actions", "warna": "amber" },
+  { "id": "m5",     "masa": "16:35", "modul": "Modul 5", "tajuk": "CD & penyelenggaraan", "warna": "indigo" },
+  { "id": "tutup",  "masa": "17:05", "tajuk": "Penutup & soal jawab",            "warna": "vue" },
+  { "id": "tamat",  "masa": "17:15", "tajuk": "Tamat",                           "tamat": true }
 ]
 </script>
 <div class="viewport">
@@ -59,19 +59,19 @@
   <p class="lead">PM2 · Nginx · Docker · <strong>CI/CD dengan GitHub Actions</strong>. Daripada laptop ke <em>server</em>, kemudian biar GitHub yang buat.</p>
   <div class="event-info">
     <div><span class="label">Tarikh</span><strong>28 Oktober 2026</strong></div>
-    <div><span class="label">Masa</span><strong>9:30 pagi hingga 12:15 tengah hari</strong></div>
+    <div><span class="label">Masa</span><strong>2:30 petang hingga 5:15 petang</strong></div>
     <div><span class="label">Anjuran</span><strong>Unijaya Resources Sdn Bhd</strong></div>
   </div>
   <aside class="notes">
     <ul>
       <li>Welcome (1 min). Registration starts straight away on the next slide: the Codespaces take a few minutes to build, and you present while they do.</li>
-      <li>The promise: by 12:15, a <code>git push</code> from their own repo updates their own live app.</li>
+      <li>The promise: by 17:15, a <code>git push</code> from their own repo updates their own live app.</li>
     </ul>
   </aside>
 </section>
 
-<section class="slide" data-title="Agenda pagi ini">
-  <h2>Agenda pagi ini</h2>
+<section class="slide" data-title="Agenda petang ini">
+  <h2>Agenda petang ini</h2>
   <div class="timeline" data-jadual-senarai></div>
   <p class="small muted mt-auto">Setiap modul: satu masalah, satu <em>command</em>, satu hasil yang anda nampak.</p>
   <aside class="notes"><p>Point out that registration is part of the plan, not lost time: the opening talk happens while Codespaces build.</p></aside>
@@ -127,8 +127,8 @@
   </aside>
 </section>
 
-<section class="slide" data-title="Demo: hasil akhir pagi ini">
-  <span class="kicker">Hasil akhir pagi ini</span>
+<section class="slide" data-title="Demo: hasil akhir petang ini">
+  <span class="kicker">Hasil akhir petang ini</span>
   <h2><code>git push</code> → 2 minit → aplikasi baharu di <em>server</em></h2>
   <div class="flow big">
     <div class="node"><strong>1. Ubah kod</strong>Tajuk aplikasi<br><code>git push</code></div>
@@ -142,19 +142,19 @@
   <div class="mock mt" style="max-width: 860px; align-self: center">
     <div class="bar">💻 Inventori Aset ICT · Jabatan Anda <span class="sp"></span>☾</div>
     <div class="body" style="text-align: center; color: #6b7785; font-size: 14px">
-      Versi 0.0.1 · commit <code>a1b2c3d</code> · dibina 26 Okt 2026, 11:52 · <span class="chip ok">Production</span>
+      Versi 1.0.0 · commit <code>a1b2c3d</code> · dibina 26 Okt 2026, 16:52 · <span class="chip ok">Production</span>
     </div>
   </div>
   <aside class="notes">
     <ul>
       <li><strong>Live demo on your own repo (≤ 4 min):</strong> change the app bar title in <code>src/App.vue</code>, commit, push. Open the Actions tab: "Test &amp; build" then "Deploy ke server". Refresh your port 9000: new title, new commit in the footer.</li>
-      <li>Point at the footer: "this line tells us exactly what is running. You'll see it change on your own app at about 12:00."</li>
+      <li>Point at the footer: "this line tells us exactly what is running. You'll see it change on your own app at about 17:00."</li>
       <li>Same app as the Vue workshop: no new app code to learn today.</li>
     </ul>
   </aside>
 </section>
 
-<section class="slide" data-title="Lima modul pagi ini">
+<section class="slide" data-title="Lima modul petang ini">
   <h2>Lima modul: setiap satu mengautomasikan yang sebelumnya</h2>
   <table class="table">
     <tr><th></th><th>Modul</th><th>Masalah yang diselesaikan</th><th><em>Command</em> utama</th><th>Hasil</th></tr>
@@ -198,7 +198,7 @@
   </div>
   <aside class="notes">
     <ul>
-      <li>Target by 10:00: everyone sees ✔ Node.js, ✔ Package projek, ✔ Repo GitHub. Everything else shows "·" for now, and that's correct.</li>
+      <li>Target by 15:00: everyone sees ✔ Node.js, ✔ Package projek, ✔ Repo GitHub. Everything else shows "·" for now, and that's correct.</li>
       <li>Anyone without a Codespace: pair with a neighbour now, catch up at the break.</li>
       <li>The idle timeout (slide 3) only applies to Codespaces created after it is set. A stopped Codespace means a stopped runner in Module 5.</li>
     </ul>
@@ -213,7 +213,7 @@
   <span class="kicker">Modul 1</span>
   <h1>PM2</h1>
   <p class="lead">"Pastikan API sentiasa hidup."</p>
-  <div class="meta"><span class="pill" data-jadual-masa="m1">10:00 – 10:08</span><span class="pill">Checkpoint 01</span></div>
+  <div class="meta"><span class="pill" data-jadual-masa="m1">15:00 – 15:08</span><span class="pill">Checkpoint 01</span></div>
   <div class="num">1</div>
   <aside class="notes"><p>8 minutes. Keep it moving: one file, three commands, one demo.</p></aside>
 </section>
@@ -292,7 +292,7 @@
   <span class="kicker">Modul 2</span>
   <h1>Nginx</h1>
   <p class="lead">"Satu alamat untuk pengguna."</p>
-  <div class="meta"><span class="pill" data-jadual-masa="m2">10:08 – 10:20</span><span class="pill">Checkpoint 02</span></div>
+  <div class="meta"><span class="pill" data-jadual-masa="m2">15:08 – 15:20</span><span class="pill">Checkpoint 02</span></div>
   <div class="num">2</div>
   <aside class="notes"><p>12 minutes. If you're behind, demo this module on the projector and let them run <code>npm run checkpoint 02</code> + the commands later.</p></aside>
 </section>
@@ -386,7 +386,7 @@
   <span class="kicker">Modul 3</span>
   <h1>Docker</h1>
   <p class="lead">"Semua dalam satu kotak, jalan di mana-mana."</p>
-  <div class="meta"><span class="pill" data-jadual-masa="m3">10:20 – 10:45</span><span class="pill">Checkpoint 03</span></div>
+  <div class="meta"><span class="pill" data-jadual-masa="m3">15:20 – 15:45</span><span class="pill">Checkpoint 03</span></div>
   <div class="num">3</div>
   <aside class="notes"><p>25 minutes. Start the build early (it takes ~2 minutes the first time), and explain the files while it runs.</p></aside>
 </section>
@@ -522,7 +522,7 @@
   <span class="kicker">Modul 4</span>
   <h1>CI dengan GitHub Actions</h1>
   <p class="lead">"GitHub <em>test</em> setiap perubahan."</p>
-  <div class="meta"><span class="pill" data-jadual-masa="m4">11:00 – 11:35</span><span class="pill">Checkpoint 04</span></div>
+  <div class="meta"><span class="pill" data-jadual-masa="m4">16:00 – 16:35</span><span class="pill">Checkpoint 04</span></div>
   <div class="num">4</div>
   <aside class="notes"><p>35 minutes. The ❌ → ✅ exercise is the heart of this module: protect its time.</p></aside>
 </section>
@@ -647,9 +647,9 @@
   <span class="kicker">Modul 5</span>
   <h1>CD &amp; Penyelenggaraan</h1>
   <p class="lead">"GitHub <em>deploy</em> bila <em>test</em> lulus."</p>
-  <div class="meta"><span class="pill" data-jadual-masa="m5">11:35 – 12:05</span><span class="pill">Checkpoint 05</span></div>
+  <div class="meta"><span class="pill" data-jadual-masa="m5">16:35 – 17:05</span><span class="pill">Checkpoint 05</span></div>
   <div class="num">5</div>
-  <aside class="notes"><p>30 minutes. Never cut this module: it's the payoff of the morning.</p></aside>
+  <aside class="notes"><p>30 minutes. Never cut this module: it's the payoff of the afternoon.</p></aside>
 </section>
 
 <section class="slide" data-title="Self-hosted runner" data-cp="05" data-minit="7"
@@ -801,8 +801,8 @@
      PENUTUP
      ===================================================================== -->
 
-<section class="slide" data-title="Apa yang anda kuasai pagi ini" data-module="Penutup" data-accent="vue" data-jadual="tutup">
-  <h2>Apa yang anda kuasai pagi ini</h2>
+<section class="slide" data-title="Apa yang anda kuasai petang ini" data-module="Penutup" data-accent="vue" data-jadual="tutup">
+  <h2>Apa yang anda kuasai petang ini</h2>
   <div class="flow big" style="margin-top: 8px">
     <div class="node"><strong>1 · PM2</strong>API sentiasa hidup<br><code>pm2 start</code></div>
     <div class="arrow">→</div>

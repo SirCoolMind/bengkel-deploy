@@ -1,6 +1,6 @@
 # Content outline (for review): Deployment dan Penyelenggaraan, PM2 · Nginx · Docker · CI/CD
 
-**Status: approved v3 (26 Oct 2026) and built.** Morning only: **09:30–12:15** (2 h 45 min), including 30 minutes of
+**Status: approved v3 (26 Oct 2026) and built.** Afternoon only: **14:30–17:15** (2 h 45 min), including 30 minutes of
 registration in the room and one 15-minute break. `FACILITATOR-GUIDE.md` is the up-to-date reference where the two differ.
 
 Same format as `vue-crud-workshop`: BM for participants, English for the facilitator guide and speaker notes,
@@ -9,7 +9,7 @@ numbered checkpoints, a slide deck in `slaid/`, and `npm run release` zipping a 
 
 ---
 
-## 1. The whole morning in one picture
+## 1. The whole afternoon in one picture
 
 Each module **automates the one before it**. That's the logic participants should leave with.
 
@@ -25,7 +25,7 @@ Each module **automates the one before it**. That's the logic participants shoul
 app** they built in the Vue workshop, so there's no new app code to learn.
 
 **The payoff they can see:** a footer in the app shows what's running:
-`Versi 0.0.1 · commit a1b2c3d · dibina 26 Okt 2026, 10:42 · [Produksi]`.
+`Versi 1.0.0 · commit a1b2c3d · dibina 26 Okt 2026, 15:42 · [Produksi]`.
 In Module 5 they change the app title, `git push`, wait ~2 minutes, refresh: new title, new commit. No manual step.
 
 ---
@@ -46,7 +46,7 @@ Check GitLab's current numbers on gitlab.com/pricing before quoting them. The se
 
 ---
 
-## 3. Registration: 30 minutes in the session (09:30–10:00)
+## 3. Registration: 30 minutes in the session (14:30–15:00)
 
 Everyone signs up and creates their Codespace **in the room**. While the Codespaces build (3–5 minutes, plus ~2 minutes
 installing Nginx/PM2), the facilitator runs the opening on the projector, so the waiting time isn't lost.
@@ -64,7 +64,7 @@ Everyone who does it saves 10 minutes, and it surfaces problems early:
 - Many sign-ups from one venue IP can trip GitHub's spam checks, so accounts made in advance are safer.
 - Office networks that block `github.com` or `*.app.github.dev` (Codespaces ports). Test the venue Wi-Fi the day before.
 
-**Fallback:** anyone without a working Codespace by 10:00 pairs with a neighbour and catches up later with
+**Fallback:** anyone without a working Codespace by 15:00 pairs with a neighbour and catches up later with
 `npm run checkpoint NN`. **Nothing to install, browser only.**
 
 ---
@@ -73,13 +73,13 @@ Everyone who does it saves 10 minutes, and it surfaces problems early:
 
 | Time | Module | Checkpoint | Result on screen |
 |---|---|---|---|
-| 09:30–10:00 | **Pendaftaran & pembukaan**: sign up, create Codespace; opening demo while it builds | 00 | `npm run semak` all green |
-| 10:00–10:20 | **1 · PM2** and **2 · Nginx** | → 01 → 02 | App on port 8080 |
-| 10:20–10:45 | **3 · Docker** | → 03 | App on port 9000, in containers |
-| 10:45–11:00 | Rehat | | |
-| 11:00–11:35 | **4 · CI** with GitHub Actions | → 04 | Green ✅, then a red ❌ they fix |
-| 11:35–12:05 | **5 · CD** and penyelenggaraan | → 05 | `git push` deploys by itself |
-| 12:05–12:15 | **Penutup**: recap, next steps, Q&A | | |
+| 14:30–15:00 | **Pendaftaran & pembukaan**: sign up, create Codespace; opening demo while it builds | 00 | `npm run semak` all green |
+| 15:00–15:20 | **1 · PM2** and **2 · Nginx** | → 01 → 02 | App on port 8080 |
+| 15:20–15:45 | **3 · Docker** | → 03 | App on port 9000, in containers |
+| 15:45–16:00 | Rehat | | |
+| 16:00–16:35 | **4 · CI** with GitHub Actions | → 04 | Green ✅, then a red ❌ they fix |
+| 16:35–17:05 | **5 · CD** and penyelenggaraan | → 05 | `git push` deploys by itself |
+| 17:05–17:15 | **Penutup**: recap, next steps, Q&A | | |
 
 **CI/CD gets 65 minutes**, plus the opening demo. PM2 + Nginx get 20 minutes, Docker 25.
 
@@ -219,7 +219,7 @@ Kubernetes · cloud VPS, domain and HTTPS setup · container registries · real 
 
 ## 10. Decisions I need from you
 
-1. **Break at 10:45–11:00** (15 min). OK, or no break / a different time?
+1. **Break at 15:45–16:00** (15 min). OK, or no break / a different time?
 2. **Private repos** for participants. Safer with a self-hosted runner (nobody else can trigger it), and enough for
    everything in the session. Only homework 3 needs a public repo.
 3. **Event details** for the title slide: date, organiser (still Unijaya Resources Sdn Bhd?).
@@ -228,5 +228,5 @@ Kubernetes · cloud VPS, domain and HTTPS setup · container registries · real 
 
 ## 11. Decisions taken
 
-Break 10:45–11:00 · private repos · organiser Unijaya Resources Sdn Bhd · date still to fill in on the title slide.
+Break 15:45–16:00 · private repos · organiser Unijaya Resources Sdn Bhd · date still to fill in on the title slide.
 The lockfile concern turned out to be a local WSL issue: `npm ci` works in a clean Linux container.

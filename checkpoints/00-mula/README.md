@@ -1,11 +1,11 @@
 # 00 · Mula: akaun GitHub dan Codespace anda
 
-**Pendaftaran** · 09:30 – 10:00 · 30 minit
+**Pendaftaran** · 14:30 – 15:00 · 30 minit
 
 Pada akhir bahagian ini, anda ada:
 - akaun GitHub,
 - repo anda sendiri (salinan projek bengkel),
-- Codespace: komputer Linux di *cloud* yang menjadi *server* anda pagi ini. Ia dibuka dalam *browser*,
+- Codespace: komputer Linux di *cloud* yang menjadi *server* anda petang ini. Ia dibuka dalam *browser*,
   jadi tiada apa-apa perlu di-*install* pada laptop anda.
 
 > 💡 **Cara paling mudah membaca panduan ini:** buka panduan ini di github.com. Setiap kotak kod di GitHub ada
@@ -152,7 +152,7 @@ Codespace berhenti sendiri selepas 30 minit tanpa aktiviti. Kita panjangkan kepa
 
 ## Langkah 6 (pilihan): lihat aplikasi dalam mod *development*
 
-Ini aplikasi **Inventori Aset ICT** dari Bengkel Vue. Pagi ini kita akan *deploy* aplikasi ini.
+Ini aplikasi **Inventori Aset ICT** dari Bengkel Vue. Petang ini kita akan *deploy* aplikasi ini.
 
 1. Dalam *terminal*, taip dan tekan **Enter**:
 
@@ -170,7 +170,7 @@ Ini aplikasi **Inventori Aset ICT** dari Bengkel Vue. Pagi ini kita akan *deploy
    Klik **Open in Browser**.
    *Tiada kotak itu?* Klik tab **PORTS** (sebelah tab **TERMINAL** di bawah), letak *mouse* di atas baris
    port `41730`, klik ikon 🌐 (*Open in Browser*).
-4. Tab baharu dibuka: senarai 48 aset. Di bawah sekali (*footer*): `Versi 0.0.1 · commit ... · Development`.
+4. Tab baharu dibuka: senarai 48 aset. Di bawah sekali (*footer*): `Versi 1.0.0 · commit ... · Development`.
 5. Kembali ke tab Codespace. Klik dalam *terminal*, tekan **Ctrl + C** untuk berhenti.
    *Prompt* `$` muncul semula: *terminal* sedia untuk *command* seterusnya.
 

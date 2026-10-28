@@ -4,7 +4,7 @@
 
 ## Kenapa?
 
-Pagi ini kita *deploy* aplikasi Inventori yang disediakan oleh bengkel. Tetapi dalam Bengkel Vue, anda membina
+Petang ini kita *deploy* aplikasi Inventori yang disediakan oleh bengkel. Tetapi dalam Bengkel Vue, anda membina
 aplikasi Inventori **anda sendiri**, dengan perubahan anda (contohnya medan **Lokasi** daripada cabaran).
 
 *Pipeline* CI/CD tidak peduli aplikasi siapa: ia *test*, *build* dan *deploy* apa sahaja yang anda *push* ke `main`.
